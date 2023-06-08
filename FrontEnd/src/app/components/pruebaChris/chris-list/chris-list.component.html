@@ -1,0 +1,19 @@
+<div class="container my-5">
+    <h1 class="mb-3">Sujeto</h1>
+    <table class="table" *ngIf="Datosxml && Datosxml.length > 0">
+        <thead>
+          <tr>
+            <th *ngFor="let atributo of Datosxml[0]">{{ atributo.split(':')[0] }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sublista of Datosxml.slice(1)">
+            <td *ngFor="let atributo of Datosxml[0]">
+              {{ getAtributoValor(sublista, atributo.split(':')[0]) }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p *ngIf="!Datosxml || Datosxml.length <= 0">No hay Chris</p>
+        
+</div>
