@@ -139,12 +139,54 @@ public class XmlManager
         return datos;
     }
 
-    public string Prueba(string nombre) 
-    {
-        List<List<string>> a = LeerXml(nombre);
-        return a[0][0];
+    public List<Dictionary<string, string>> SelectFromXml(string nombreXml, string selectFrom, string where)
+{
+    string rutaCarpeta = Path.Combine(Environment.CurrentDirectory, nombreXml);
+    string rutaXml = Path.Combine(rutaCarpeta, nombreXml + ".xml");
 
+    // Comprobar si la carpeta y el archivo XML existen
+    if (!Directory.Exists(rutaCarpeta))
+    {
+        Console.WriteLine($"La carpeta '{nombreXml}' no existe.");
+        return null;
     }
+    if (!File.Exists(rutaXml))
+    {
+        Console.WriteLine($"El archivo XML '{nombreXml}.xml' no existe en la carpeta '{nombreXml}'.");
+        return null;
+    }
+
+    XmlDocument xmlDoc = new XmlDocument();
+    xmlDoc.Load(rutaXml);
+
+    string xpathQuery = $"//Instancia[{where}]";
+    XmlNodeList selectedNodes = xmlDoc.SelectNodes(xpathQuery);
+
+    List<Dictionary<string, string>> resultados = new List<Dictionary<string, string>>();
+
+    foreach (XmlNode node in selectedNodes)
+    {
+        Dictionary<string, string> instancia = new Dictionary<string, string>();
+
+        string[] atributos = selectFrom.Split(',');
+
+        foreach (string atributo in atributos)
+        {
+            string nombreAtributo = atributo.Trim();
+
+            if (node.Attributes[nombreAtributo] != null)
+            {
+                string valorAtributo = node.Attributes[nombreAtributo].Value;
+                instancia.Add(nombreAtributo, valorAtributo);
+            }
+        }
+
+        resultados.Add(instancia);
+    }
+
+    return resultados;
+}
+
 
 
 }

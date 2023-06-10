@@ -18,8 +18,6 @@ namespace BackEnd.API.Controllers
 
             List<List<string>> datos = xmlM.LeerXml("Personas");
 
-            List<string> da = datos[0];
-
             return Ok(datos);
         }
 

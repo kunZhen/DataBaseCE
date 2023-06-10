@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Carros>
+  <Atributo Atributo="Modelo" />
+  <Atributo Atributo="Color" />
+  <Atributo Atributo="Año" />
+  <Instancia Modelo="Weasdf" Color="Azul" Año="2001" />
+  <Instancia Modelo="Mercedez" Color="Rojo" Año="2018" />
+</Carros>
