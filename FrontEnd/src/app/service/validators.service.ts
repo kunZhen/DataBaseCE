@@ -25,19 +25,13 @@ export class ValidatorsService {
   }
 
   camposIguales(campo1: string, campo2: string) {
-    return (formGroup: AbstractControl): ValidationErrors | null => {
+    const pass1 = campo1?.trim();
+    const pass2 = campo2?.trim();
 
-      const pass1 = formGroup.get(campo1)?.value;
-      const pass2 = formGroup.get(campo2)?.value;
-
-      if (pass1 !== pass2) {
-        formGroup.get(campo2)?.setErrors({ noIguales: true })
-        return { noIguales: true }
+    if (pass1 != pass2 || pass1 == '') {
+      return false;
       }
 
-      formGroup.get(campo2)?.setErrors(null)
-
-      return null;
-    }
+    return true;
   }
 }
