@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 
+#pragma warning disable CS8602 
+#pragma warning disable CS8600
+#pragma warning disable CS8603 
 public class XmlManager
 {
     public void CrearCarpetaXmlStore(string Nombre, List<string> atributos)
@@ -139,7 +142,7 @@ public class XmlManager
         return datos;
     }
 
-    public List<Dictionary<string, string>> SelectFromXml(string nombreXml, string selectFrom, string where)
+    public List<List<string>> SelectFromXml(string nombreXml, string atributos, string condiciones)
 {
     string rutaCarpeta = Path.Combine(Environment.CurrentDirectory, nombreXml);
     string rutaXml = Path.Combine(rutaCarpeta, nombreXml + ".xml");
@@ -159,29 +162,59 @@ public class XmlManager
     XmlDocument xmlDoc = new XmlDocument();
     xmlDoc.Load(rutaXml);
 
-    string xpathQuery = $"//Instancia[{where}]";
-    XmlNodeList selectedNodes = xmlDoc.SelectNodes(xpathQuery);
+    XmlNode raizNode = xmlDoc.DocumentElement;
 
-    List<Dictionary<string, string>> resultados = new List<Dictionary<string, string>>();
+    // Obtener los nombres de los atributos solicitados
+    List<string> atributosSolicitados = atributos.Split(',').ToList();
 
-    foreach (XmlNode node in selectedNodes)
+    // Obtener las condiciones solicitadas
+    List<string> condicionesSolicitadas = condiciones.Split(',').ToList();
+
+    // Verificar si los atributos solicitados existen en el XML
+    foreach (string atributo in atributosSolicitados)
     {
-        Dictionary<string, string> instancia = new Dictionary<string, string>();
-
-        string[] atributos = selectFrom.Split(',');
-
-        foreach (string atributo in atributos)
+        if (raizNode.SelectSingleNode($"Atributo[@Atributo='{atributo}']") == null)
         {
-            string nombreAtributo = atributo.Trim();
+            Console.WriteLine($"El atributo '{atributo}' no existe en el archivo XML '{nombreXml}.xml'.");
+            return null;
+        }
+    }
 
-            if (node.Attributes[nombreAtributo] != null)
+    List<List<string>> resultados = new List<List<string>>();
+
+    // Agregar los nombres de los atributos a los resultados
+    resultados.Add(atributosSolicitados);
+
+    // Obtener las instancias que cumplen con las condiciones
+    foreach (XmlNode instanciaNode in raizNode.SelectNodes("Instancia"))
+    {
+        bool cumpleCondiciones = true;
+
+        // Verificar si la instancia cumple con las condiciones
+        foreach (string condicion in condicionesSolicitadas)
+        {
+            string[] partesCondicion = condicion.Split('=');
+            string nombreAtributo = partesCondicion[0].Trim();
+            string valorCondicion = partesCondicion[1].Trim();
+
+            XmlAttribute atributo = instanciaNode.Attributes[nombreAtributo];
+            if (atributo == null || atributo.Value != valorCondicion)
             {
-                string valorAtributo = node.Attributes[nombreAtributo].Value;
-                instancia.Add(nombreAtributo, valorAtributo);
+                cumpleCondiciones = false;
+                break;
             }
         }
 
-        resultados.Add(instancia);
+        // Si la instancia cumple con las condiciones, agregar sus valores a los resultados
+        if (cumpleCondiciones)
+        {
+            List<string> valoresInstancia = new List<string>();
+            foreach (string atributo in atributosSolicitados)
+            {
+                valoresInstancia.Add(instanciaNode.Attributes[atributo].Value);
+            }
+            resultados.Add(valoresInstancia);
+        }
     }
 
     return resultados;

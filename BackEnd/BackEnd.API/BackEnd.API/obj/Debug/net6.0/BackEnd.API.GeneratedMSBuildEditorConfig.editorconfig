@@ -9,9 +9,17 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BackEnd.API
 build_property.RootNamespace = BackEnd.API
+<<<<<<< HEAD
 build_property.ProjectDir = c:\Users\chris\OneDrive\Escritorio\Materia\Datos\DataBaseCE\BackEnd\BackEnd.API\BackEnd.API\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
 build_property.MSBuildProjectDirectory = c:\Users\chris\OneDrive\Escritorio\Materia\Datos\DataBaseCE\BackEnd\BackEnd.API\BackEnd.API
+=======
+build_property.ProjectDir = C:\Users\Usuario\Documents\I Semestre - 2023\DataBaseCE\frontEnd\BackEnd\BackEnd.API\BackEnd.API\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Usuario\Documents\I Semestre - 2023\DataBaseCE\frontEnd\BackEnd\BackEnd.API\BackEnd.API
+>>>>>>> 20ee91246e292aed9df07df532ed5b239b4867f7
 build_property._RazorSourceGeneratorDebug = 
