@@ -1,19 +1,52 @@
 <div class="container my-5">
     <h1 class="mb-3">Sujeto</h1>
+    <div class="row">
+      <div class="col-6">
+        <form #form="ngForm" (ngSubmit)="getAll()">
+          <div calss="mb-3">
+            <label for="name" class="form-label"> Xml Name</label>
+            <input tpye="text" class="form-label" id="name" 
+            name="name" [(ngModel)] = "Namexml">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <form #form="ngForm" (ngSubmit)="getSome()">
+          <div calss="mb-3">
+            <label for="name" class="form-label"> Xml Name</label>
+            <input tpye="text" class="form-label" id="name" 
+            name="name" [(ngModel)] = "Namexml">
+            <label for="name" class="form-label"> Atributos</label>
+            <input tpye="text" class="form-label" id="atributes" 
+            name="atributes" [(ngModel)] = "Atributes">
+            <label for="name" class="form-label"> Atributos</label>
+            <input tpye="text" class="form-label" id="conditions" 
+            name="conditions" [(ngModel)] = "Conditions">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+    
     <table class="table" *ngIf="Datosxml && Datosxml.length > 0">
-        <thead>
-          <tr>
-            <th *ngFor="let atributo of Datosxml[0]">{{ atributo.split(':')[0] }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let sublista of Datosxml.slice(1)">
-            <td *ngFor="let atributo of Datosxml[0]">
-              {{ getAtributoValor(sublista, atributo.split(':')[0]) }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <p *ngIf="!Datosxml || Datosxml.length <= 0">No hay Chris</p>
+      <thead>
+        <tr>
+          <!-- Recorre la primera fila de Datosxml para obtener los encabezados -->
+          <th *ngFor="let encabezado of Datosxml[0]">{{ encabezado }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Recorre las filas restantes de Datosxml -->
+        <tr *ngFor="let fila of Datosxml.slice(1)">
+          <td *ngFor="let dato of fila">{{ dato }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="!Datosxml || Datosxml.length <= 0">No hay Datos</p>
+    
         
 </div>

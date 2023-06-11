@@ -44,12 +44,13 @@ export class ChrisListComponent implements OnInit{
     }
   ];*/
   Datosxml: Datos = [];
+  Namexml: string = "";
+  Atributes: string = "";
+  Conditions: string= "";
   constructor(private Xml: XmlmanagService) {}
 
   ngOnInit(): void {
-    this.Xml.getAllData().subscribe(data => {
-      this.Datosxml = data;
-    });
+
   }
 
   getAtributoValor(instancia: string[], atributo: string): string {
@@ -60,5 +61,19 @@ export class ChrisListComponent implements OnInit{
       return '';
     }
   }
+
+  getAll() {
+    this.Xml.getAllData(this.Namexml).subscribe(data => {
+      this.Datosxml = data;
+    });
+  }
+
+  getSome(){
+    this.Xml.getSomeData(this.Namexml, this.Atributes, this.Conditions).subscribe(data => {
+      this.Datosxml = data;
+    });
+    console.log(this.Datosxml);
+  }
+
 
 }

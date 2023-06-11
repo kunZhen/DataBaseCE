@@ -4,7 +4,7 @@
   <Atributo Atributo="Apellido" />
   <Atributo Atributo="Edad" />
   <Atributo Atributo="Cumpleaños" />
-  <Instancia Nombre="Pedro" Apellido="Gonzalez" Edad="68" />
-  <Instancia Nombre="Juan" Apellido="Gonzalez" Edad="28" />
-  <Instancia Nombre="Ana" Apellido="Gonzalez" Cumpleaños="68" />
+  <Instancia Nombre="Pedro" Apellido="Gonzalez" Edad="68" Cumpleaños="25"/>
+  <Instancia Nombre="Juan" Apellido="Gonzalez" Edad="28" Cumpleaños="13"/>
+  <Instancia Nombre="Ana" Apellido="Gonzalez" Edad="34" Cumpleaños="13" />
 </Personas>

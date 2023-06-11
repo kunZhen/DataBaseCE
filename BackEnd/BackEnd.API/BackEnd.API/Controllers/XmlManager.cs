@@ -109,8 +109,12 @@ public class XmlManager
         Console.WriteLine("Se han agregado los datos al archivo XML correctamente.");
     }
 
-    /* This is a C# method that reads an XML file and returns a list of lists containing the attributes
-    and instances of the file. */
+    /* The above code is a C# method that loads data from an XML file and returns it as a list of lists
+    of strings. It first checks if the specified folder and XML file exist, and then uses an
+    XmlDocument object to load the XML file. It then extracts the attribute names and instance
+    values from the XML file and stores them in a list of lists of strings, where the first list
+    contains the attribute names and the subsequent lists contain the instance values. Finally, it
+    returns the list of lists of strings. */
     public List<List<string>> LeerXml(string Nombre)
     {
         string rutaCarpeta = Path.Combine(Environment.CurrentDirectory, Nombre);
@@ -150,9 +154,8 @@ public class XmlManager
             List<string> instancia = new List<string>();
             foreach (XmlAttribute atributo in nodo.Attributes)
             {
-                string nombreAtributo = atributo.Name;
                 string valorAtributo = atributo.Value;
-                instancia.Add($"{nombreAtributo}:{valorAtributo}");
+                instancia.Add(valorAtributo);
             }
             datos.Add(instancia);
         }
@@ -499,14 +502,20 @@ public class XmlManager
             this.right = right;
         }
 
-        /* The above code is implementing a conditional statement in C#. It checks if a dictionary
-        called "variables" contains a key called "right". If it does, it compares the value
-        associated with the key "left" in the dictionary with the value associated with the key
-        "right". If it doesn't, it compares the value associated with the key "left" in the
-        dictionary with the value of the variable "right". The method returns a boolean value
-        indicating whether the two values are equal. */
+        /* The above code is a method in C# that checks if two variables are equal. It takes in two
+        parameters, "left" and "right", which represent the names of the variables to be compared.
+        The method first checks if the "left" variable exists in a dictionary called "variables". If
+        it does not exist, the method returns false. If the "left" variable exists, the method
+        checks if the "right" variable exists in the "variables" dictionary. If it does, the method
+        compares the values of the two variables. If the "right" variable does not exist in the */
         public override object Evaluate(Dictionary<string, object> variables)
         {
+            if (!variables.ContainsKey(left))
+            {
+                // Handle the case where the key does not exist in the dictionary
+                return false;
+            }
+
             if (variables.ContainsKey(right))
             {
                 return variables[left].Equals(variables[right]);

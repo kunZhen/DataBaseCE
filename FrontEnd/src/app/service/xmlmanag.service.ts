@@ -12,8 +12,25 @@ export class XmlmanagService {
   baseApiUrl: string = enviroment.baseApiUrl;
   constructor(private http: HttpClient) { }
 
-  getAllData(): Observable<Array<Array<string>>>{
-    return this.http.get<Array<Array<string>>>(this.baseApiUrl +  '/api/Chris')
-    
+  getAllData(XmlName: string): Observable<Array<Array<string>>>{
+    const options = {
+      params: {
+        xmlName: XmlName
+      }
+    };
+    return this.http.get<Array<Array<string>>>(this.baseApiUrl +  '/api/Chris/GetAllData', options);
+  
+  }
+
+  getSomeData(XmlName: string, Atributes: string, Conditions: string): Observable<Array<Array<string>>>{
+    const options = {
+      params: {
+        xmlName: XmlName,
+        atributes: Atributes,
+        conditions: Conditions
+      }
+    };
+    return this.http.get<Array<Array<string>>>(this.baseApiUrl +  '/api/Chris/GetSomeData', options);
+  
   }
 }
