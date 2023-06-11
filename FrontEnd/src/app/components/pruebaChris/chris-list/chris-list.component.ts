@@ -75,5 +75,12 @@ export class ChrisListComponent implements OnInit{
     console.log(this.Datosxml);
   }
 
+  getSomeJoin(){
+    this.Xml.getSomeDataJoin(this.Namexml, this.Atributes, this.Conditions).subscribe(data => {
+      this.Datosxml = data;
+    });
+    console.log(this.Datosxml);
+  }
+
 
 }
