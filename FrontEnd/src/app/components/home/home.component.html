@@ -308,33 +308,6 @@
           </div>
           <!-- END UPDATE XML STORE Form -->
 
-          <!-- UPDATE-ALL XML STORE Form -->
-          <div class="card animate__animated animate__zoomIn" *ngIf="updateCardStatus" >
-            <div class="card-body">
-              <h5 class="card-title">UPDATE-ALL</h5>
-
-              <form class="row g-3" autocomplete="off" [formGroup]="updateAllForm" (ngSubmit)="updateAllSubmit()">
-                <div class="col-md-12">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingName" formControlName="update" placeholder="UPDATE">
-                    <label for="floatingName">UPDATE</label>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingName" formControlName="set" placeholder="SET">
-                    <label for="floatingName">SET</label>
-                  </div>
-                </div>
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Apply</button>
-                </div>
-              </form>
-
-            </div>
-          </div>
-          <!-- END UPDATE-ALL XML STORE Form -->
-
         </div>
       </div>
     </section>

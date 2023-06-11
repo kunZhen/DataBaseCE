@@ -20,7 +20,7 @@ export class HomeComponent {
   }
 
   constructor( private createF: FormBuilder, private selectF: FormBuilder, private selectJoinF: FormBuilder,
-    private insertF: FormBuilder, private deleteF: FormBuilder, private updateF: FormBuilder, private updateAllF: FormBuilder) {}
+    private insertF: FormBuilder, private deleteF: FormBuilder, private updateF: FormBuilder) {}
 
   //Forms
   createForm: FormGroup = this.createF.group({
@@ -59,11 +59,6 @@ export class HomeComponent {
     where: ['']
   })
 
-  updateAllForm: FormGroup = this.updateAllF.group({
-    update: [''],
-    set: ['']
-  })
-
   //OnSubmitForms ------------------------------------------
   createSubmit() {
     console.log(this.createForm.value);
@@ -93,11 +88,6 @@ export class HomeComponent {
   updateSubmit() {
     console.log(this.updateForm.value);
     this.updateForm.markAllAsTouched();
-  }
-
-  updateAllSubmit() {
-    console.log(this.updateAllForm.value);
-    this.updateAllForm.markAllAsTouched();
   }
 
   //submit -------------------------------------------------
