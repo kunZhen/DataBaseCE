@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Computadores>
+    <Atributo Atributo="Cursos" />
+    <Atributo Atributo="Profesores" />
+    <Atributo Atributo="Estudiantes" />
+</Computadores>
