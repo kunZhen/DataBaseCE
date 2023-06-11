@@ -1,94 +1,100 @@
 using System;
-using System.IO;
-using System.IO.Compression;
-using System.Text;
-
-public class UserManager
+using System.Collections;
+using System.IO.Ports;
+using System.Text.Json;
+#pragma warning disable CS8601
+namespace app
 {
-    private const string UserInfoFolder = "UserInfo";
-
-    public void CreateUser(string username, string password)
+    public static class UserManager
     {
-        // Verificar si la carpeta UserInfo existe, si no, crearla
-        if (!Directory.Exists(UserInfoFolder))
+        /* This code is saving a compressed version of the user's password to a file. */
+        public static void SaveCompressedPassword(string username, string password)
         {
-            Directory.CreateDirectory(UserInfoFolder);
-        }
-
-        // Comprimir la contraseña utilizando el algoritmo Huffman
-        byte[] compressedPassword = CompressString(password);
-
-        // Crear un archivo con el nombre de usuario en la carpeta UserInfo y guardar la contraseña comprimida
-        string filePath = Path.Combine(UserInfoFolder, $"{username}.txt");
-        File.WriteAllBytes(filePath, compressedPassword);
-        Console.WriteLine($"Usuario '{username}' creado exitosamente.");
-    }
-
-    public bool ValidateUser(string username, string password)
-    {
-        // Verificar si la carpeta UserInfo existe
-        if (!Directory.Exists(UserInfoFolder))
-        {
-            Console.WriteLine("La carpeta UserInfo no existe.");
-            return false;
-        }
-
-        // Verificar si el archivo del usuario existe
-        string filePath = Path.Combine(UserInfoFolder, $"{username}.txt");
-        if (!File.Exists(filePath))
-        {
-            Console.WriteLine($"El usuario '{username}' no existe.");
-            return false;
-        }
-
-        // Leer el archivo y descomprimir la contraseña
-        byte[] compressedPassword = File.ReadAllBytes(filePath);
-        string decompressedPassword = DecompressString(compressedPassword);
-
-        // Comparar la contraseña descomprimida con la recibida
-        bool passwordMatch = string.Equals(decompressedPassword, password, StringComparison.OrdinalIgnoreCase);
-
-        if (passwordMatch)
-        {
-            Console.WriteLine("La contraseña es válida.");
-        }
-        else
-        {
-            Console.WriteLine("La contraseña no es válida.");
-        }
-
-        return passwordMatch;
-    }
-
-    private byte[] CompressString(string input)
-    {
-        byte[] inputData = Encoding.UTF8.GetBytes(input);
-
-        using (MemoryStream outputStream = new MemoryStream())
-        {
-            using (GZipStream compressionStream = new GZipStream(outputStream, CompressionMode.Compress))
+            HuffmanTree huffmanTree = new HuffmanTree();
+            huffmanTree.Build(password);
+            BitArray encoded = huffmanTree.Encode(password);
+            byte[] bytes = new byte[encoded.Length / 8 + (encoded.Length % 8 == 0 ? 0 : 1)];
+            encoded.CopyTo(bytes, 0);
+            Directory.CreateDirectory("UserInfo");
+            using (FileStream stream = File.Create(Path.Combine("UserInfo", username)))
             {
-                compressionStream.Write(inputData, 0, inputData.Length);
+                byte[] frequencies = JsonSerializer.SerializeToUtf8Bytes(huffmanTree.Frequencies);
+                stream.Write(frequencies);
+                stream.WriteByte((byte)'\n');
+                byte[] bitArrayLength = JsonSerializer.SerializeToUtf8Bytes(encoded.Length);
+                stream.Write(bitArrayLength);
+                stream.WriteByte((byte)'\n');
+                stream.Write(bytes);
             }
-
-            return outputStream.ToArray();
         }
-    }
 
-    private string DecompressString(byte[] input)
-    {
-        using (MemoryStream inputStream = new MemoryStream(input))
+
+        /* This code is checking if a compressed version of the user's password exists in a file. If
+        the file does not exist, it returns false. If the file exists, it reads the file and
+        deserializes the Huffman tree frequencies and the length of the encoded BitArray from the
+        file. It then builds a new Huffman tree using the user's password and decodes the BitArray
+        using the Huffman tree. Finally, it compares the decoded password with the original password
+        and returns true if they match, and false otherwise. */
+        public static bool CheckCompressedPassword(string username, string password)
         {
-            using (MemoryStream outputStream = new MemoryStream())
+            if (!File.Exists(Path.Combine("UserInfo", username)))
+                return false;
+            HuffmanTree huffmanTree = new HuffmanTree();
+            int bitArrayLength;
+            byte[] bytes;
+            using (FileStream stream = File.OpenRead(Path.Combine("UserInfo", username)))
             {
-                using (GZipStream decompressionStream = new GZipStream(inputStream, CompressionMode.Decompress))
+                using (MemoryStream memoryStream = new MemoryStream())
                 {
-                    decompressionStream.CopyTo(outputStream);
+                    int b;
+                    while ((b = stream.ReadByte()) != '\n' && b != -1)
+                        memoryStream.WriteByte((byte)b);
+                    memoryStream.Position = 0;
+                    huffmanTree.Frequencies = JsonSerializer.DeserializeAsync<Dictionary<char, int>>(memoryStream).Result;
+                    huffmanTree.Build(password);
+                    memoryStream.SetLength(0);
+                    while ((b = stream.ReadByte()) != '\n' && b != -1)
+                        memoryStream.WriteByte((byte)b);
+                    memoryStream.Position = 0;
+                    bitArrayLength = JsonSerializer.DeserializeAsync<int>(memoryStream).Result;
+                }
+                bytes = new byte[stream.Length - stream.Position];
+                stream.Read(bytes, 0, bytes.Length);
+            }
+            BitArray encoded = new BitArray(bytes);
+            encoded.Length = bitArrayLength;
+            string decoded = huffmanTree.Decode(encoded);
+            if (decoded == password)
+            {
+                // La contraseña coincide
+                return true;
+            }
+            else
+            {
+                // La contraseña no coincide
+                try
+                {
+                    // Abre la conexión con el puerto serie del Arduino
+                    using (SerialPort arduinoPort = new SerialPort("COM3", 9600))
+                    {
+                        arduinoPort.Open();
+
+                        // Envía la señal al Arduino
+                        arduinoPort.Write("W"); // Puedes enviar cualquier carácter o cadena que desees
+
+                        // Cierra la conexión con el puerto serie del Arduino
+                        arduinoPort.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Maneja cualquier excepción que pueda ocurrir al comunicarse con el Arduino
+                    Console.WriteLine("Error al enviar la señal al Arduino: " + ex.Message);
                 }
 
-                byte[] decompressedData = outputStream.ToArray();
-                return Encoding.UTF8.GetString(decompressedData);
+                return false;
             }
         }
     }
 }
+
