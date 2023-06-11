@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class HomeComponent {
   // CARD STATUS
-  createCardStatus: boolean = false;
+  createCardStatus: boolean = true;
   selectCardStatus: boolean = false;
   insertCardStatus: boolean = false;
   deleteCardStatus: boolean = false;
@@ -19,7 +19,8 @@ export class HomeComponent {
 
   }
 
-  constructor( private createF: FormBuilder, private selectF: FormBuilder, private selectJoinF: FormBuilder ) {}
+  constructor( private createF: FormBuilder, private selectF: FormBuilder, private selectJoinF: FormBuilder,
+    private insertF: FormBuilder, private deleteF: FormBuilder, private updateF: FormBuilder, private updateAllF: FormBuilder) {}
 
   //Forms
   createForm: FormGroup = this.createF.group({
@@ -42,11 +43,31 @@ export class HomeComponent {
     on: ['']
   })
 
+  insertForm: FormGroup = this.insertF.group({
+    insertInto: [''],
+    values: ['']
+  })
+
+  deleteForm: FormGroup = this.deleteF.group({
+    deleteFrom: [''],
+    where: ['']
+  })
+
+  updateForm: FormGroup = this.updateF.group({
+    update: [''],
+    set: [''],
+    where: ['']
+  })
+
+  updateAllForm: FormGroup = this.updateAllF.group({
+    update: [''],
+    set: ['']
+  })
+
   //OnSubmitForms ------------------------------------------
   createSubmit() {
     console.log(this.createForm.value);
     this.createForm.markAllAsTouched();
-
   }
 
   selectSubmit() {
@@ -57,6 +78,26 @@ export class HomeComponent {
   selectJoinSubmit() {
     console.log(this.selectJoinForm.value);
     this.selectJoinForm.markAllAsTouched();
+  }
+
+  insertSubmit() {
+    console.log(this.insertForm.value);
+    this.insertForm.markAllAsTouched();
+  }
+
+  deleteSubmit() {
+    console.log(this.deleteForm.value);
+    this.deleteForm.markAllAsTouched();
+  }
+
+  updateSubmit() {
+    console.log(this.updateForm.value);
+    this.updateForm.markAllAsTouched();
+  }
+
+  updateAllSubmit() {
+    console.log(this.updateAllForm.value);
+    this.updateAllForm.markAllAsTouched();
   }
 
   //submit -------------------------------------------------
