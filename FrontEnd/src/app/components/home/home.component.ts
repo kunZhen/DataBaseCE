@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -18,13 +19,53 @@ export class HomeComponent {
 
   }
 
-  //submit
+  constructor( private createF: FormBuilder, private selectF: FormBuilder, private selectJoinF: FormBuilder ) {}
+
+  //Forms
+  createForm: FormGroup = this.createF.group({
+    name: ['', [Validators.required]],
+    atributte1: ['', [Validators.required]],
+    atributte2: [''],
+    atributte3: ['']
+  })
+
+  selectForm: FormGroup = this.selectF.group({
+    select: [''],
+    from: [''],
+    where: ['']
+  })
+
+  selectJoinForm: FormGroup = this.selectJoinF.group({
+    select: [''],
+    from: [''],
+    innerJoin: [''],
+    on: ['']
+  })
+
+  //OnSubmitForms ------------------------------------------
+  createSubmit() {
+    console.log(this.createForm.value);
+    this.createForm.markAllAsTouched();
+
+  }
+
+  selectSubmit() {
+    console.log(this.selectForm.value);
+    this.selectForm.markAllAsTouched();
+  }
+
+  selectJoinSubmit() {
+    console.log(this.selectJoinForm.value);
+    this.selectJoinForm.markAllAsTouched();
+  }
+
+  //submit -------------------------------------------------
   submit() {
     console.log("submitted ");
   }
 
 
-  // Change card status
+  // Change card status ------------------------------------
   createCardChange() {
     this.createCardStatus = !this.createCardStatus;
     console.log("createCardStatus: ", this.createCardStatus);

@@ -114,30 +114,29 @@
             <div class="card-body">
               <h5 class="card-title">Create XML Store</h5>
 
-              <form class="row g-3">
+              <form class="row g-3" autocomplete="off" [formGroup]="createForm" (ngSubmit)="createSubmit()">
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingName" placeholder="Your Name">
+                    <input type="text" class="form-control" id="floatingName" formControlName="name"/>
                     <label for="floatingName">Name</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="email" class="form-control" id="floatingEmail" placeholder="Your Email">
-                    <label for="floatingEmail">Attribute 1</label>
+                    <input type="text" class="form-control" id="floatingAttribute1" formControlName="atributte1">
+                    <label for="floatingAttribute1">Attribute 1</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Attribute 2</label>
+                    <input type="text" class="form-control" id="floatingAttribute2" formControlName="atributte2">
+                    <label for="floatingAttribute2">Attribute 2</label>
                   </div>
                 </div>
-                <div class="col-12">
+                <div class="col-md-12">
                   <div class="form-floating">
-                    <textarea class="form-control" placeholder="Address" id="floatingTextarea"
-                      style="height: 100px;"></textarea>
-                    <label for="floatingTextarea">Attribute 3</label>
+                    <input type="text" class="form-control" id="floatingAttribute3" formControlName="atributte3">
+                    <label for="floatingAttribute3">Attribute 3</label>
                   </div>
                 </div>
                 <div class="text-center">
@@ -154,24 +153,23 @@
             <div class="card-body">
               <h5 class="card-title">SELECT</h5>
 
-              <form class="row g-3">
+              <form class="row g-3" autocomplete="off" [formGroup]="selectForm" (ngSubmit)="selectSubmit()">
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingName" placeholder="Your Name">
-                    <label for="floatingName">SELECT</label>
+                    <input type="text" class="form-control" id="floatingSelect" formControlName="select">
+                    <label for="floatingSelect">SELECT</label>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="email" class="form-control" id="floatingEmail" placeholder="Your Email">
-                    <label for="floatingEmail">FROM</label>
+                    <input type="text" class="form-control" id="floatingSelectFrom" formControlName="from">
+                    <label for="floatingSelectFrom">FROM</label>
                   </div>
                 </div>
-                <div class="col-12">
+                <div class="col-md-12">
                   <div class="form-floating">
-                    <textarea class="form-control" placeholder="Address" id="floatingTextarea"
-                      style="height: 100px;"></textarea>
-                    <label for="floatingTextarea">WHERE</label>
+                    <input type="text" class="form-control" id="floatingSelectWhere" formControlName="where">
+                    <label for="floatingSelectWhere">WHERE</label>
                   </div>
                 </div>
                 <div class="text-center">
@@ -188,23 +186,29 @@
             <div class="card-body">
               <h5 class="card-title">SELECT JOIN</h5>
 
-              <form class="row g-3">
+              <form class="row g-3" autocomplete="off" [formGroup]="selectJoinForm" (ngSubmit)="selectJoinSubmit()">
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingSelect" placeholder="Your Name">
-                    <label for="floatingSelect">SELECT</label>
+                    <input type="text" class="form-control" id="floatingSelectJoin" formControlName="select">
+                    <label for="floatingSelectJoin">SELECT</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="email" class="form-control" id="floatingFrom" placeholder="Your Email">
+                    <input type="text" class="form-control" id="floatingFrom" formControlName="from">
                     <label for="floatingFrom">FROM</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="password" class="form-control" id="floatinInnerJoin" placeholder="Password">
+                    <input type="text" class="form-control" id="floatinInnerJoin" formControlName="innerJoin">
                     <label for="floatinInnerJoin">INNER JOIN</label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingON" formControlName="on">
+                    <label for="floatingON">ON</label>
                   </div>
                 </div>
                 <div class="text-center">
