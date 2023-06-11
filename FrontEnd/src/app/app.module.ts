@@ -17,7 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ChrisListComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
