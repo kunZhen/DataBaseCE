@@ -15,6 +15,14 @@ namespace BackEnd.API.Controllers
         public string Request { get; set; }
         public List<string> Lista { get; set; }
     }
+    public class UpdateDataRequest
+    {
+        public string XmlName { get; set; }
+        public string Attributes { get; set; }
+        public string Conditions { get; set; }
+        public bool Confirmation { get; set; }
+    }
+
 
     [ApiController]
     [Route("api/[controller]")]
@@ -77,17 +85,15 @@ namespace BackEnd.API.Controllers
 
 
 
-        [HttpGet("UpdateData")]
-        public IActionResult UpdateData([FromQuery] string request, string atributtes, string conditions, bool confirmation)
+        [HttpPost("UpdateData")]
+        public IActionResult UpdateData([FromBody] UpdateDataRequest data)
         {
             XmlManager xmlM = new XmlManager();
-
-
-            List<List<string>> datos = xmlM.UpdateXml(request, atributtes, conditions, confirmation);
-
-
+            List<List<string>> datos = xmlM.UpdateXml(data.XmlName, data.Attributes, data.Conditions, data.Confirmation);
             return Ok(datos);
         }
+
+
 
         [HttpPost("CreateUser")]
         public IActionResult CreateUser([FromQuery] string username, [FromQuery] string password)
