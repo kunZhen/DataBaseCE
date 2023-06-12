@@ -62,17 +62,11 @@ export class ChrisListComponent implements OnInit{
     }
   }
 
-  //Select normal
-  getAll() {
-    console.log(this.Namexml);
-    this.Xml.getAllData(this.Namexml).subscribe(data => {
-      this.Datosxml = data;
-    });
-  }
+
 
   //se especifica atributo con condicion
-  getSome(){
-    this.Xml.getSomeData(this.Namexml, this.Atributes, this.Conditions).subscribe(data => {
+  getData(){
+    this.Xml.getData(this.Namexml, this.Atributes, this.Conditions).subscribe(data => {
       this.Datosxml = data;
     });
     console.log(this.Datosxml);

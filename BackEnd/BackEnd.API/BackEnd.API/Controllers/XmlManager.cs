@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Ports;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -109,67 +110,12 @@ public class XmlManager
         Console.WriteLine("Se han agregado los datos al archivo XML correctamente.");
     }
 
-    /* The above code is a C# method that loads data from an XML file and returns it as a list of lists
-    of strings. It first checks if the specified folder and XML file exist, and then uses an
-    XmlDocument object to load the XML file. It then extracts the attribute names and instance
-    values from the XML file and stores them in a list of lists of strings, where the first list
-    contains the attribute names and the subsequent lists contain the instance values. Finally, it
-    returns the list of lists of strings. */
-    public List<List<string>> LeerXml(string Nombre)
-    {
-        string rutaCarpeta = Path.Combine(Environment.CurrentDirectory, Nombre);
-        string rutaXml = Path.Combine(rutaCarpeta, Nombre + ".xml");
-
-        // Comprobar si la carpeta y el archivo XML existen
-        if (!Directory.Exists(rutaCarpeta))
-        {
-            Console.WriteLine($"La carpeta '{Nombre}' no existe.");
-            return null;
-        }
-        if (!File.Exists(rutaXml))
-        {
-            Console.WriteLine($"El archivo XML '{Nombre}.xml' no existe en la carpeta '{Nombre}'.");
-            return null;
-        }
-
-        XmlDocument xmlDoc = new XmlDocument();
-        xmlDoc.Load(rutaXml);
-
-        XmlNode raizNode = xmlDoc.DocumentElement;
-
-        List<List<string>> datos = new List<List<string>>();
-
-        // Obtener los atributos
-        List<string> atributos = new List<string>();
-        foreach (XmlNode nodo in raizNode.SelectNodes("Atributo"))
-        {
-            string atributo = nodo.Attributes["Atributo"].Value;
-            atributos.Add(atributo);
-        }
-        datos.Add(atributos);
-
-        // Obtener las instancias
-        foreach (XmlNode nodo in raizNode.SelectNodes("Instancia"))
-        {
-            List<string> instancia = new List<string>();
-            foreach (XmlAttribute atributo in nodo.Attributes)
-            {
-                string valorAtributo = atributo.Value;
-                instancia.Add(valorAtributo);
-            }
-            datos.Add(instancia);
-        }
-
-        return datos;
-    }
-
-
-    /* The code is a C# method that takes in a string representing a set of attributes to select, a
-    string representing a where condition, and a string representing a name. It then loads an XML
-    file with the given name, parses the where condition using an expression parser, and queries the
-    XML data based on the where condition. It creates a list of lists of strings representing the
-    selected attributes for each instance that satisfies the where condition. The first list in the
-    result represents the header row with the attribute names. */
+    /* The code is defining a method that queries an XML file based on a given set of attributes and a
+    where condition. It first checks if the specified folder and XML file exist, then loads the XML
+    file using XDocument. It then parses the selectAttributesStr and whereCondition parameters using
+    an ExpressionParser class. It queries the XML data using LINQ and the whereFunc expression, and
+    creates a list of lists containing the selected attributes for each matching element. The
+    resulting list is returned. */
     public List<List<string>> SelectFromXml(string Nombre, string selectAttributesStr, string whereCondition)
     {
         // Split the selectAttributesStr into an array of strings
@@ -192,21 +138,40 @@ public class XmlManager
         // Load the XML file
         XDocument doc = XDocument.Load(rutaXml);
 
+        // Select all attributes if selectAttributesStr is equal to "*"
+        if (selectAttributesStr == "*")
+        {
+            var firstElement = doc.Descendants("Instancia").FirstOrDefault();
+            if (firstElement != null)
+            {
+                selectAttributes = firstElement.Attributes().Select(a => a.Name.LocalName).ToArray();
+            }
+        }
+
         // Parse the where condition
         ExpressionParser parser = new ExpressionParser();
-        Expression expression = parser.Parse(whereCondition);
 
-        Func<XElement, bool> whereFunc = element =>
+        Func<XElement, bool> whereFunc;
+
+        if (whereCondition == "*")
         {
-            Dictionary<string, object> variables = new Dictionary<string, object>();
-            foreach (XAttribute attribute in element.Attributes())
+            whereFunc = element => true;
+        }
+        else
+        {
+            Expression expression = parser.Parse(whereCondition);
+            whereFunc = element =>
             {
-                string variableName = $"{Nombre}.{attribute.Name}";
-                variables[variableName] = attribute.Value.Trim();
-                variables[attribute.Name.ToString()] = attribute.Value.Trim();
-            }
-            return (bool)expression.Evaluate(variables);
-        };
+                Dictionary<string, object> variables = new Dictionary<string, object>();
+                foreach (XAttribute attribute in element.Attributes())
+                {
+                    string variableName = $"{Nombre}.{attribute.Name}";
+                    variables[variableName] = attribute.Value.Trim();
+                    variables[attribute.Name.ToString()] = attribute.Value.Trim();
+                }
+                return (bool)expression.Evaluate(variables);
+            };
+        }
 
         // Query the XML data
         var query = from element in doc.Descendants("Instancia")
@@ -536,7 +501,6 @@ public class XmlManager
     deletes the matching elements and returns a table of the remaining elements, with the header row
     containing the attribute names and the data rows containing */
     public List<List<string>> DeleteFromXml(string xmlName, string deleteConditionsStr, bool applyChanges)
-
     {
         // Variable to store the table
         List<List<string>> table = new List<List<string>>();
@@ -599,6 +563,32 @@ public class XmlManager
 
             // Delete the matching elements
             var elementsToDelete = doc.Descendants("Instancia").Where(deleteFunc).ToList();
+
+            // Send signal to Arduino if more than one instance is being deleted
+            if (elementsToDelete.Count > 1)
+            {
+                Console.WriteLine("Peligro");
+                try
+                {
+                    // Abre la conexión con el puerto serie del Arduino
+                    using (SerialPort arduinoPort = new SerialPort("COM3", 9600))
+                    {
+                        arduinoPort.Open();
+
+                        // Envía la señal al Arduino
+                        arduinoPort.Write("D"); // Puedes enviar cualquier carácter o cadena que desees
+
+                        // Cierra la conexión con el puerto serie del Arduino
+                        arduinoPort.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Maneja cualquier excepción que pueda ocurrir al comunicarse con el Arduino
+                    Console.WriteLine("Error al enviar la señal al Arduino: " + ex.Message);
+                }
+            }
+
             foreach (var element in elementsToDelete)
             {
                 if (applyChanges)

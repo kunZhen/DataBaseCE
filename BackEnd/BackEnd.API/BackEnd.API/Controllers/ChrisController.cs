@@ -11,18 +11,9 @@ namespace BackEnd.API.Controllers
     [Route("api/[controller]")]
     public class ChrisController : Controller
     {
-        [HttpGet("GetAllData")]
-        public IActionResult GetAllData([FromQuery] string xmlName)
-        {
-            XmlManager xmlM= new XmlManager();
-
-            List<List<string>> datos = xmlM.LeerXml(xmlName);
-
-            return Ok(datos);
-        }
-
-        [HttpGet("GetSomeData")]
-        public IActionResult GetSomeData([FromQuery] string xmlName, string atributes, string conditions)
+  
+        [HttpGet("GetData")]
+        public IActionResult GetData([FromQuery] string xmlName, string atributes, string conditions)
         {
             XmlManager xmlM= new XmlManager();
          

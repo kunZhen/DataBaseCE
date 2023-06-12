@@ -18,11 +18,11 @@ export class XmlmanagService {
         xmlName: XmlName
       }
     };
-    return this.http.get<Array<Array<string>>>(this.baseApiUrl +  '/api/Chris/GetAllData', options);
+    return this.http.get<Array<Array<string>>>(this.baseApiUrl +  '/api/Chris/GetData', options);
   
   }
 
-  getSomeData(XmlName: string, Atributes: string, Conditions: string): Observable<Array<Array<string>>>{
+  getData(XmlName: string, Atributes: string, Conditions: string): Observable<Array<Array<string>>>{
     const options = {
       params: {
         xmlName: XmlName,
@@ -30,7 +30,7 @@ export class XmlmanagService {
         conditions: Conditions
       }
     };
-    return this.http.get<Array<Array<string>>>(this.baseApiUrl +  '/api/Chris/GetSomeData', options);
+    return this.http.get<Array<Array<string>>>(this.baseApiUrl +  '/api/Chris/GetData', options);
   
   }
 
