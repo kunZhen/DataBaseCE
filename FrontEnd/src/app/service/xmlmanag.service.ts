@@ -42,12 +42,13 @@ export class XmlmanagService {
       request: XmlName,
       lista: attribList
     };
-  
+
     return this.http.post<void>(this.baseApiUrl + '/api/Chris/CreateXML', requestModel);
   }
 
 
   addData(XmlName: string, attribList: string): Observable<void>{
+    console.log("XmlName: ", XmlName)
     const options = {
       params: {
         request: XmlName,
