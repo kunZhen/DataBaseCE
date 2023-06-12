@@ -38,14 +38,12 @@ export class XmlmanagService {
   }
 
   createXML(XmlName: string, attribList: Array<string>): Observable<void> {
-    const options = {
-      params: {
-        request: XmlName,
-        Lista: attribList
-      }
+    const requestModel = {
+      request: XmlName,
+      lista: attribList
     };
-
-    return this.http.get<void>(this.baseApiUrl + '/api/Chris/CreateXML', options);
+  
+    return this.http.post<void>(this.baseApiUrl + '/api/Chris/CreateXML', requestModel);
   }
 
 
@@ -56,7 +54,9 @@ export class XmlmanagService {
         Lista: attribList
       }
     };
-    return this.http.get<void>(this.baseApiUrl +  '/api/Chris/AgregarData', options);
+    console.log("se llamo")
+    console.log(options);
+    return this.http.post<void>(this.baseApiUrl +  '/api/Chris/AgregarData', options);
   }
 
   deleteData(XmlName: string, Conditions: string, Confirmation: boolean): Observable<Array<Array<string>>>{
@@ -93,7 +93,7 @@ export class XmlmanagService {
         password: Password
       }
     };
-    return this.http.get<void>(this.baseApiUrl +  '/api/Chris/CreateUser', options);
+    return this.http.post<void>(this.baseApiUrl +  '/api/Chris/CreateUser', options);
   }
 
   Loging(Username: string, Password: string): Observable<boolean>{
