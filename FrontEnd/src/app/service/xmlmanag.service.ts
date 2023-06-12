@@ -12,15 +12,6 @@ export class XmlmanagService {
   baseApiUrl: string = enviroment.baseApiUrl;
   constructor(private http: HttpClient) { }
 
-  getAllData(XmlName: string): Observable<Array<Array<string>>>{
-    const options = {
-      params: {
-        xmlName: XmlName
-      }
-    };
-    return this.http.get<Array<Array<string>>>(this.baseApiUrl +  '/api/Chris/GetData', options);
-  
-  }
 
   getData(XmlName: string, Atributes: string, Conditions: string): Observable<Array<Array<string>>>{
     const options = {
@@ -31,7 +22,7 @@ export class XmlmanagService {
       }
     };
     return this.http.get<Array<Array<string>>>(this.baseApiUrl +  '/api/Chris/GetData', options);
-  
+
   }
 
   getSomeDataJoin(XmlName: string, Atributes: string, Conditions: string): Observable<Array<Array<string>>>{
@@ -43,7 +34,7 @@ export class XmlmanagService {
       }
     };
     return this.http.get<Array<Array<string>>>(this.baseApiUrl +  '/api/Chris/GetSomeDataJoin', options);
-  
+
   }
 
   createXML(XmlName: string, attribList: Array<string>): Observable<void> {
@@ -53,10 +44,10 @@ export class XmlmanagService {
         Lista: attribList
       }
     };
-  
+
     return this.http.get<void>(this.baseApiUrl + '/api/Chris/CreateXML', options);
   }
-  
+
 
   addData(XmlName: string, attribList: string): Observable<void>{
     const options = {
@@ -78,7 +69,7 @@ export class XmlmanagService {
       }
     };
     return this.http.get<Array<Array<string>>>(this.baseApiUrl +  '/api/Chris/DeleteData', options);
-  
+
   }
 
   updateData(XmlName: string, Atributes:string, Conditions: string, Confirmation: boolean): Observable<Array<Array<string>>>{
@@ -92,7 +83,7 @@ export class XmlmanagService {
       }
     };
     return this.http.get<Array<Array<string>>>(this.baseApiUrl +  '/api/Chris/UpdateData', options);
-  
+
   }
 
   createUser(Username: string, Password: string): Observable<void>{
