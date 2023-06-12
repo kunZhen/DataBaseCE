@@ -10,9 +10,9 @@ import { XmlmanagService } from 'src/app/service/xmlmanag.service';
 })
 export class HomeComponent implements OnInit {
   // CARD STATUS
-  createCardStatus: boolean = true;
+  createCardStatus: boolean = false;
   selectCardStatus: boolean = false;
-  insertCardStatus: boolean = false;
+  insertCardStatus: boolean = true;
   deleteCardStatus: boolean = false;
   updateCardStatus: boolean = false;
 
@@ -85,7 +85,9 @@ export class HomeComponent implements OnInit {
   //crea el XML
   createXML(xmlName: string, attribList: Array<string>) {
 
-    this.Xml.createXML(xmlName, attribList);
+    this.Xml.createXML(xmlName, attribList).subscribe(data => {
+
+    });
     console.log("attrList: ", typeof this.attrList);
 
 
@@ -94,13 +96,20 @@ export class HomeComponent implements OnInit {
     console.log("createXML executed");
   }
 
+  //Insert
+  addData(xmlName: string, attribList: string) {
+    this.Xml.addData(xmlName, attribList);
+
+    console.log("addData executed");
+  }
+
   //OnSubmitForms ------------------------------------------
   createSubmit() {
     console.log(this.createForm.value);
     this.createForm.markAllAsTouched();
 
     if (this.createForm.value.name != "" && this.createForm.value.atributte1 != "" && this.createForm.value.atributte2 == "" && this.createForm.value.atributte3 == "") {
-      this.attrList.push(this.createForm.value.atributte1);
+      this.attrList.push(this.createForm.value.atributte1.toString());
 
       this.createXML(this.createForm.value.name, this.attrList);
     }
@@ -119,8 +128,6 @@ export class HomeComponent implements OnInit {
 
       this.createXML(this.createForm.value.name, this.attrList);
     }
-
-
   }
 
   selectSubmit() {
@@ -163,9 +170,16 @@ export class HomeComponent implements OnInit {
     }
   }
 
+
+  //INSERT INTO =
+  //VALUES =
   insertSubmit() {
     console.log(this.insertForm.value);
     this.insertForm.markAllAsTouched();
+
+    if (this.insertForm.value.insertInto != "" && this.insertForm.value.values != "") {
+      this.addData(this.insertForm.value.insertInto, this.insertForm.value.values)
+    }
   }
 
   deleteSubmit() {
