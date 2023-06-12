@@ -110,32 +110,36 @@
         <div class="col-lg-6">
 
           <!-- CREATE XML STORE Form -->
-          <div class="card animate__animated animate__zoomIn" *ngIf="createCardStatus" >
+          <div class="card animate__animated animate__zoomIn" *ngIf="createCardStatus">
             <div class="card-body">
               <h5 class="card-title">Create XML Store</h5>
 
               <form class="row g-3" autocomplete="off" [formGroup]="createForm" (ngSubmit)="createSubmit()">
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingName" placeholder="Name" formControlName="name"/>
+                    <input type="text" class="form-control" id="floatingName" placeholder="Name"
+                      formControlName="name" />
                     <label for="floatingName">Name</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingAttribute1" placeholder="Attribute 1" formControlName="atributte1">
+                    <input type="text" class="form-control" id="floatingAttribute1" placeholder="Attribute 1"
+                      formControlName="atributte1">
                     <label for="floatingAttribute1">Attribute 1</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingAttribute2" placeholder="Attribute 2" formControlName="atributte2">
+                    <input type="text" class="form-control" id="floatingAttribute2" placeholder="Attribute 2"
+                      formControlName="atributte2">
                     <label for="floatingAttribute2">Attribute 2</label>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingAttribute3" placeholder="Attribute 3" formControlName="atributte3">
+                    <input type="text" class="form-control" id="floatingAttribute3" placeholder="Attribute 3"
+                      formControlName="atributte3">
                     <label for="floatingAttribute3">Attribute 3</label>
                   </div>
                 </div>
@@ -149,26 +153,29 @@
           <!-- END CREATE XML STORE Form -->
 
           <!-- SELECT XML STORE Form -->
-          <div class="card animate__animated animate__zoomIn" *ngIf="selectCardStatus" >
+          <div class="card animate__animated animate__zoomIn" *ngIf="selectCardStatus">
             <div class="card-body">
               <h5 class="card-title">SELECT</h5>
 
               <form class="row g-3" autocomplete="off" [formGroup]="selectForm" (ngSubmit)="selectSubmit()">
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingSelect" placeholder="SELECT" formControlName="select">
+                    <input type="text" class="form-control" id="floatingSelect" placeholder="SELECT"
+                      formControlName="select">
                     <label for="floatingSelect">SELECT</label>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingSelectFrom" placeholder="FROM" formControlName="from">
+                    <input type="text" class="form-control" id="floatingSelectFrom" placeholder="FROM"
+                      formControlName="from">
                     <label for="floatingSelectFrom">FROM</label>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingSelectWhere" placeholder="WHERE" formControlName="where">
+                    <input type="text" class="form-control" id="floatingSelectWhere" placeholder="WHERE"
+                      formControlName="where">
                     <label for="floatingSelectWhere">WHERE</label>
                   </div>
                 </div>
@@ -182,14 +189,15 @@
           <!-- END SELECT XML STORE Form -->
 
           <!-- SELECT JOIN XML STORE Form -->
-          <div class="card animate__animated animate__zoomIn" *ngIf="selectCardStatus" >
+          <div class="card animate__animated animate__zoomIn" *ngIf="selectCardStatus">
             <div class="card-body">
               <h5 class="card-title">SELECT JOIN</h5>
 
               <form class="row g-3" autocomplete="off" [formGroup]="selectJoinForm" (ngSubmit)="selectJoinSubmit()">
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingSelectJoin" placeholder="SELECT" formControlName="select">
+                    <input type="text" class="form-control" id="floatingSelectJoin" placeholder="SELECT"
+                      formControlName="select">
                     <label for="floatingSelectJoin">SELECT</label>
                   </div>
                 </div>
@@ -201,7 +209,8 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatinInnerJoin" placeholder="INNER JOIN" formControlName="innerJoin">
+                    <input type="text" class="form-control" id="floatinInnerJoin" placeholder="INNER JOIN"
+                      formControlName="innerJoin">
                     <label for="floatinInnerJoin">INNER JOIN</label>
                   </div>
                 </div>
@@ -221,21 +230,23 @@
           <!-- END SELECT JOIN XML STORE Form -->
 
           <!-- INSERT XML STORE Form -->
-          <div class="card animate__animated animate__zoomIn" *ngIf="insertCardStatus" >
+          <div class="card animate__animated animate__zoomIn" *ngIf="insertCardStatus">
             <div class="card-body">
               <h5 class="card-title">INSERT</h5>
 
               <form class="row g-3" autocomplete="off" [formGroup]="insertForm" (ngSubmit)="insertSubmit()">
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingInsertInto" placeholder="INSERT INTO" formControlName="insertInto">
+                    <input type="text" class="form-control" id="floatingInsertInto" placeholder="INSERT INTO"
+                      formControlName="insertInto">
                     <label for="floatingInsertInto">INSERT INTO</label>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingValues" placeholder="VALUES" formControlName="values">
+                    <input type="text" class="form-control" id="floatingValues" placeholder="VALUES"
+                      formControlName="values">
                     <label for="floatingValues">VALUES</label>
                   </div>
                 </div>
@@ -249,20 +260,22 @@
           <!-- END INSERT XML STORE Form -->
 
           <!-- DELETE XML STORE Form -->
-          <div class="card animate__animated animate__zoomIn" *ngIf="deleteCardStatus" >
+          <div class="card animate__animated animate__zoomIn" *ngIf="deleteCardStatus">
             <div class="card-body">
               <h5 class="card-title">DELETE</h5>
 
               <form class="row g-3" autocomplete="off" [formGroup]="deleteForm" (ngSubmit)="deleteSubmit()">
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingDeleteFrom" placeholder="DELETE FROM" formControlName="deleteFrom">
+                    <input type="text" class="form-control" id="floatingDeleteFrom" placeholder="DELETE FROM"
+                      formControlName="deleteFrom">
                     <label for="floatingDeleteFrom">DELETE FROM</label>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingWhere" placeholder="WHERE" formControlName="where">
+                    <input type="text" class="form-control" id="floatingWhere" placeholder="WHERE"
+                      formControlName="where">
                     <label for="floatingDeleteFrom">WHERE</label>
                   </div>
                 </div>
@@ -276,14 +289,15 @@
           <!-- END DELETE XML STORE Form -->
 
           <!-- UPDATE XML STORE Form -->
-          <div class="card animate__animated animate__zoomIn" *ngIf="updateCardStatus" >
+          <div class="card animate__animated animate__zoomIn" *ngIf="updateCardStatus">
             <div class="card-body">
               <h5 class="card-title">UPDATE</h5>
 
               <form class="row g-3" autocomplete="off" [formGroup]="updateForm" (ngSubmit)="updateSubmit()">
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingUpdate" formControlName="update" placeholder="UPDATE">
+                    <input type="text" class="form-control" id="floatingUpdate" formControlName="update"
+                      placeholder="UPDATE">
                     <label for="floatingUpdate">UPDATE</label>
                   </div>
                 </div>
@@ -295,7 +309,8 @@
                 </div>
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingWhere" formControlName="where" placeholder="WHERE">
+                    <input type="text" class="form-control" id="floatingWhere" formControlName="where"
+                      placeholder="WHERE">
                     <label for="floatingWhere">WHERE</label>
                   </div>
                 </div>
@@ -307,6 +322,24 @@
             </div>
           </div>
           <!-- END UPDATE XML STORE Form -->
+
+          <!-- Aquí termina todos los FORMS -->
+
+          <!-- Table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <!-- Recorre la primera fila de Datosxml para obtener los encabezados -->
+                <th>hola</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Recorre las filas restantes de Datosxml -->
+              <tr >
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
 
         </div>
       </div>
