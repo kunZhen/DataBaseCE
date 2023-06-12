@@ -8,10 +8,10 @@ import { XmlmanagService } from 'src/app/service/xmlmanag.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
   // CARD STATUS
   createCardStatus: boolean = false;
-  selectCardStatus: boolean = false;
+  selectCardStatus: boolean = true;
   insertCardStatus: boolean = false;
   deleteCardStatus: boolean = false;
   updateCardStatus: boolean = false;
@@ -22,11 +22,11 @@ export class HomeComponent implements OnInit{
 
   }
 
-  
 
-  constructor( private createF: FormBuilder, private selectF: FormBuilder, private selectJoinF: FormBuilder,
+
+  constructor(private createF: FormBuilder, private selectF: FormBuilder, private selectJoinF: FormBuilder,
     private insertF: FormBuilder, private deleteF: FormBuilder, private updateF: FormBuilder,
-    private Xml: XmlmanagService) {}
+    private Xml: XmlmanagService) { }
 
   //Forms
   createForm: FormGroup = this.createF.group({
@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit{
 
   getAll(nameXml: string) {
     console.log("nameXml: ", nameXml);
-    
+
     this.Xml.getAllData(nameXml).subscribe(data => {
       this.datosXml = data;
     });
@@ -75,22 +75,40 @@ export class HomeComponent implements OnInit{
     console.log(this.datosXml);
   }
 
+  //unir varios xml y buscarlos
+  getSomeJoin(nameXml: string, atributes: string, conditions: string) {
+    this.Xml.getSomeDataJoin(nameXml, atributes, conditions).subscribe(data => {
+      this.datosXml = data;
+    });
+
+    console.log(this.datosXml);
+  }
+
+
   //OnSubmitForms ------------------------------------------
   createSubmit() {
     console.log(this.createForm.value);
     this.createForm.markAllAsTouched();
 
-    this.getAll(this.createForm.value.name);
   }
 
   selectSubmit() {
     console.log(this.selectForm.value);
     this.selectForm.markAllAsTouched();
+
+    if (this.selectForm.value.from != "" && this.selectForm.value.select == "*") {
+      this.getAll(this.selectForm.value.from);
+    }
+
   }
 
   selectJoinSubmit() {
     console.log(this.selectJoinForm.value);
     this.selectJoinForm.markAllAsTouched();
+
+    if (this.selectJoinForm.value.from != "" && this.selectJoinForm.value.innerJoin != "" && this.selectJoinForm.value.select != "" && this.selectJoinForm.value.on != "") {
+      this.getSomeJoin(this.selectJoinForm.value.from + ", " + this.selectJoinForm.value.innerJoin, this.selectJoinForm.value.select, this.selectJoinForm.value.on);
+    }
   }
 
   insertSubmit() {

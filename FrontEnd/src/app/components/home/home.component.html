@@ -326,17 +326,16 @@
           <!-- Aquí termina todos los FORMS -->
 
           <!-- Table -->
-          <table class="table">
+          <table class="table" *ngIf="datosXml && datosXml.length > 0">
             <thead>
               <tr>
                 <!-- Recorre la primera fila de Datosxml para obtener los encabezados -->
-                <th>hola</th>
-              </tr>
+                <th *ngFor="let encabezado of datosXml[0]">{{ encabezado }}</th>
             </thead>
             <tbody>
               <!-- Recorre las filas restantes de Datosxml -->
-              <tr >
-                <td></td>
+              <tr *ngFor="let fila of datosXml.slice(1)">
+                <td *ngFor="let dato of fila">{{ dato }}</td>
               </tr>
             </tbody>
           </table>
