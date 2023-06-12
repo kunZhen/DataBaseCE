@@ -13,7 +13,7 @@ export class XmlmanagService {
   constructor(private http: HttpClient) { }
 
 
-  getData(XmlName: string, Atributes: string, Conditions: string): Observable<Array<Array<string>>>{
+  getData(XmlName: string, Atributes: string, Conditions: string): Observable<Array<Array<string>>> {
     const options = {
       params: {
         xmlName: XmlName,
@@ -21,11 +21,11 @@ export class XmlmanagService {
         conditions: Conditions
       }
     };
-    return this.http.get<Array<Array<string>>>(this.baseApiUrl +  '/api/Chris/GetData', options);
+    return this.http.get<Array<Array<string>>>(this.baseApiUrl + '/api/Chris/GetData', options);
 
   }
 
-  getSomeDataJoin(XmlName: string, Atributes: string, Conditions: string): Observable<Array<Array<string>>>{
+  getSomeDataJoin(XmlName: string, Atributes: string, Conditions: string): Observable<Array<Array<string>>> {
     const options = {
       params: {
         xmlName: XmlName,
@@ -33,7 +33,7 @@ export class XmlmanagService {
         conditions: Conditions
       }
     };
-    return this.http.get<Array<Array<string>>>(this.baseApiUrl +  '/api/Chris/GetSomeDataJoin', options);
+    return this.http.get<Array<Array<string>>>(this.baseApiUrl + '/api/Chris/GetSomeDataJoin', options);
 
   }
 
@@ -47,33 +47,23 @@ export class XmlmanagService {
   }
 
 
-  addData(XmlName: string, attribList: string): Observable<void>{
-    console.log("XmlName: ", XmlName)
-    const options = {
-      params: {
-        request: XmlName,
-        Lista: attribList
-      }
+  addData(XmlName: string, attribList: string): Observable<void> {
+    const body = {
+      request: XmlName,
+      Lista: attribList
     };
-    console.log("se llamo")
-    console.log(options);
-    return this.http.post<void>(this.baseApiUrl +  '/api/Chris/AgregarData', options);
+    return this.http.post<void>(this.baseApiUrl + '/api/Chris/AgregarData', body);
   }
 
-  deleteData(XmlName: string, Conditions: string, Confirmation: boolean): Observable<Array<Array<string>>>{
-    const options = {
-      params: {
-        xmlName: XmlName,
-        conditions: Conditions,
-        confirmation: Confirmation
 
-      }
-    };
-    return this.http.get<Array<Array<string>>>(this.baseApiUrl +  '/api/Chris/DeleteData', options);
+  deleteData(XmlName: string, Conditions: string, Confirmation: boolean): Observable<Array<Array<string>>> {
+    const url = `${this.baseApiUrl}/api/Chris/DeleteData?xmlName=${XmlName}&conditions=${Conditions}&confirmation=${Confirmation}`;
 
-  }
+    return this.http.get<Array<Array<string>>>(url);
+}
 
-  updateData(XmlName: string, Atributes:string, Conditions: string, Confirmation: boolean): Observable<Array<Array<string>>>{
+
+  updateData(XmlName: string, Atributes: string, Conditions: string, Confirmation: boolean): Observable<Array<Array<string>>> {
     const options = {
       params: {
         xmlName: XmlName,
@@ -83,29 +73,26 @@ export class XmlmanagService {
 
       }
     };
-    return this.http.get<Array<Array<string>>>(this.baseApiUrl +  '/api/Chris/UpdateData', options);
+    return this.http.get<Array<Array<string>>>(this.baseApiUrl + '/api/Chris/UpdateData', options);
 
   }
 
-  createUser(Username: string, Password: string): Observable<void>{
-    const options = {
-      params: {
-        username: Username,
-        password: Password
-      }
+  createUser(Username: string, Password: string): Observable<void> {
+    const body = {
+      username: Username,
+      password: Password
     };
-    return this.http.post<void>(this.baseApiUrl +  '/api/Chris/CreateUser', options);
+
+    return this.http.post<void>(this.baseApiUrl + '/api/Chris/CreateUser', body);
   }
 
-  Loging(Username: string, Password: string): Observable<boolean>{
-    const options = {
-      params: {
-        username: Username,
-        password: Password
-      }
-    };
-    return this.http.get<boolean>(this.baseApiUrl +  '/api/Chris/Login', options);
+
+  loging(Username: string, Password: string): Observable<boolean> {
+    const url = `${this.baseApiUrl}/api/Chris/Login?username=${Username}&password=${Password}`;
+
+    return this.http.get<boolean>(url);
   }
+
 
 
 }
