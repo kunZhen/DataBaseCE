@@ -62,12 +62,14 @@ export class ChrisListComponent implements OnInit{
     }
   }
 
+  //Select normal
   getAll() {
     this.Xml.getAllData(this.Namexml).subscribe(data => {
       this.Datosxml = data;
     });
   }
 
+  //se especifica atributo con condicion
   getSome(){
     this.Xml.getSomeData(this.Namexml, this.Atributes, this.Conditions).subscribe(data => {
       this.Datosxml = data;
@@ -75,6 +77,7 @@ export class ChrisListComponent implements OnInit{
     console.log(this.Datosxml);
   }
 
+  //unir varios xml y buscarlos
   getSomeJoin(){
     this.Xml.getSomeDataJoin(this.Namexml, this.Atributes, this.Conditions).subscribe(data => {
       this.Datosxml = data;

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Datos } from 'src/app/models/chris.model';
+import { XmlmanagService } from 'src/app/service/xmlmanag.service';
 
 @Component({
   selector: 'app-home',
@@ -8,19 +10,21 @@ import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class HomeComponent {
   // CARD STATUS
-  createCardStatus: boolean = true;
+  createCardStatus: boolean = false;
   selectCardStatus: boolean = false;
   insertCardStatus: boolean = false;
   deleteCardStatus: boolean = false;
   updateCardStatus: boolean = false;
 
+  datosXml: Datos = [];
 
   ngOnInit(): void {
 
   }
 
   constructor( private createF: FormBuilder, private selectF: FormBuilder, private selectJoinF: FormBuilder,
-    private insertF: FormBuilder, private deleteF: FormBuilder, private updateF: FormBuilder) {}
+    private insertF: FormBuilder, private deleteF: FormBuilder, private updateF: FormBuilder,
+    private Xml: XmlmanagService) {}
 
   //Forms
   createForm: FormGroup = this.createF.group({
@@ -59,10 +63,22 @@ export class HomeComponent {
     where: ['']
   })
 
+  getAll(nameXml: string) {
+    console.log("nameXml: ", nameXml);
+    
+    this.Xml.getAllData(nameXml).subscribe(data => {
+      this.datosXml = data;
+    });
+
+    console.log(this.datosXml);
+  }
+
   //OnSubmitForms ------------------------------------------
   createSubmit() {
     console.log(this.createForm.value);
     this.createForm.markAllAsTouched();
+
+    this.getAll(this.createForm.value.name);
   }
 
   selectSubmit() {
