@@ -62,6 +62,8 @@ export class XmlmanagService {
 
 
 updateData(XmlName: string, Atributes: string, Conditions: string, Confirmation: boolean): Observable<Array<Array<string>>> {
+  console.log(XmlName, Atributes, Conditions, Confirmation);
+  
   const url = `${this.baseApiUrl}/api/Chris/UpdateData`;
   const body = {
     request: XmlName,
