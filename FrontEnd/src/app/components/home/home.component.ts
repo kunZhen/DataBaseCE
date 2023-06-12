@@ -85,9 +85,7 @@ export class HomeComponent implements OnInit {
   //crea el XML
   createXML(xmlName: string, attribList: Array<string>) {
 
-    this.Xml.createXML(xmlName, attribList).subscribe(data => {
-
-    });
+    this.Xml.createXML(xmlName, attribList).subscribe(data => {});
     console.log("attrList: ", typeof this.attrList);
 
 

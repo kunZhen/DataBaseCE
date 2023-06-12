@@ -10,6 +10,12 @@ using System.Xml.Linq;
 
 namespace BackEnd.API.Controllers
 {
+    public class CreateXmlRequestModel
+    {
+        public string Request { get; set; }
+        public List<string> Lista { get; set; }
+    }
+
     [ApiController]
     [Route("api/[controller]")]
     public class ChrisController : Controller
@@ -19,7 +25,7 @@ namespace BackEnd.API.Controllers
         public IActionResult GetData([FromQuery] string xmlName, string atributes, string conditions)
         {
             XmlManager xmlM = new XmlManager();
-
+            Console.WriteLine("prue1");
 
             List<List<string>> datos = xmlM.SelectFromXml(xmlName, atributes, conditions);
 
@@ -42,15 +48,16 @@ namespace BackEnd.API.Controllers
 
 
         [HttpPost("CreateXML")]
-        public IActionResult CreateXML([FromQuery] string request, List<string> Lista)
+        public IActionResult CreateXML([FromBody] CreateXmlRequestModel model)
         {
+            Console.WriteLine("prue2");
             XmlManager xmlrequest = new XmlManager();
-            xmlrequest.CrearCarpetaXmlStore(request, Lista);
+            xmlrequest.CrearCarpetaXmlStore(model.Request, model.Lista);
 
             return Ok();
         }
 
-        [HttpGet("AgregarData")]
+        [HttpPost("AgregarData")]
         public IActionResult AgregarData([FromQuery] string request, string Lista)
         {
             XmlManager xmlrequest = new XmlManager();
