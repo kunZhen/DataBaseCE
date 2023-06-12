@@ -53,17 +53,6 @@ export class ChrisListComponent implements OnInit{
 
   }
 
-  getAtributoValor(instancia: string[], atributo: string): string {
-    const atributoBuscado = instancia.find((item: string) => item.startsWith(atributo));
-    if (atributoBuscado) {
-      return atributoBuscado.split(':')[1];
-    } else {
-      return '';
-    }
-  }
-
-
-
   //se especifica atributo con condicion
   getData(){
     this.Xml.getData(this.Namexml, this.Atributes, this.Conditions).subscribe(data => {

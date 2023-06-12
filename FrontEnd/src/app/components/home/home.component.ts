@@ -10,19 +10,19 @@ import { XmlmanagService } from 'src/app/service/xmlmanag.service';
 })
 export class HomeComponent implements OnInit {
   // CARD STATUS
-  createCardStatus: boolean = false;
-  selectCardStatus: boolean = true;
+  createCardStatus: boolean = true;
+  selectCardStatus: boolean = false;
   insertCardStatus: boolean = false;
   deleteCardStatus: boolean = false;
   updateCardStatus: boolean = false;
 
   datosXml: Datos = [];
+  attrList: string[] = [];
+
 
   ngOnInit(): void {
 
   }
-
-
 
   constructor(private createF: FormBuilder, private selectF: FormBuilder, private selectJoinF: FormBuilder,
     private insertF: FormBuilder, private deleteF: FormBuilder, private updateF: FormBuilder,
@@ -65,10 +65,8 @@ export class HomeComponent implements OnInit {
     where: ['']
   })
 
-  getAll(nameXml: string) {
-    console.log("nameXml: ", nameXml);
-
-    this.Xml.getAllData(nameXml).subscribe(data => {
+  getData(nameXml: string, atributes: string, conditions: string){
+    this.Xml.getData(nameXml, atributes, conditions).subscribe(data => {
       this.datosXml = data;
     });
 
@@ -84,11 +82,44 @@ export class HomeComponent implements OnInit {
     console.log(this.datosXml);
   }
 
+  //crea el XML
+  createXML(xmlName: string, attribList: Array<string>) {
+
+    this.Xml.createXML(xmlName, attribList);
+    console.log("attrList: ", typeof this.attrList);
+
+
+    this.attrList = [];
+
+    console.log("createXML executed");
+  }
 
   //OnSubmitForms ------------------------------------------
   createSubmit() {
     console.log(this.createForm.value);
     this.createForm.markAllAsTouched();
+
+    if (this.createForm.value.name != "" && this.createForm.value.atributte1 != "" && this.createForm.value.atributte2 == "" && this.createForm.value.atributte3 == "") {
+      this.attrList.push(this.createForm.value.atributte1);
+
+      this.createXML(this.createForm.value.name, this.attrList);
+    }
+
+    if (this.createForm.value.name != "" && this.createForm.value.atributte1 != "" && this.createForm.value.atributte2 != "" && this.createForm.value.atributte3 == "") {
+      this.attrList.push(this.createForm.value.atributte1);
+      this.attrList.push(this.createForm.value.atributte2);
+
+      this.createXML(this.createForm.value.name, this.attrList);
+    }
+
+    if (this.createForm.value.name != "" && this.createForm.value.atributte1 != "" && this.createForm.value.atributte2 != "" && this.createForm.value.atributte3 != "") {
+      this.attrList.push(this.createForm.value.atributte1);
+      this.attrList.push(this.createForm.value.atributte2);
+      this.attrList.push(this.createForm.value.atributte3);
+
+      this.createXML(this.createForm.value.name, this.attrList);
+    }
+
 
   }
 
@@ -96,15 +127,36 @@ export class HomeComponent implements OnInit {
     console.log(this.selectForm.value);
     this.selectForm.markAllAsTouched();
 
-    if (this.selectForm.value.from != "" && this.selectForm.value.select == "*") {
-      this.getAll(this.selectForm.value.from);
+    // SELECT = *
+    // FROM = Carros
+    // WHERE = *
+    if (this.selectForm.value.from != "" && this.selectForm.value.select == "*" && this.selectForm.value.where == "*") {
+      this.getData(this.selectForm.value.from, this.selectForm.value.select, this.selectForm.value.where);
     }
 
+    // SELECT = Modelo
+    // FROM = Carros
+    // WHERE = *
+    if (this.selectForm.value.from != "" && this.selectForm.value.select != "" && this.selectForm.value.where == "*") {
+      this.getData(this.selectForm.value.from, this.selectForm.value.select, this.selectForm.value.where);
+    }
+
+    // SELECT = Modelo
+    // FROM = Carros
+    // WHERE = Año=2001
+    if (this.selectForm.value.from != "" && this.selectForm.value.select != "" && this.selectForm.value.where != "") {
+      this.getData(this.selectForm.value.from, this.selectForm.value.select, this.selectForm.value.where);
+    }
   }
 
   selectJoinSubmit() {
     console.log(this.selectJoinForm.value);
     this.selectJoinForm.markAllAsTouched();
+
+    // FROM = Personas
+    // INNER JOIN = CarrosDueño
+    // SELECT = CarrosDueño.Modelo, Personas.Nombre
+    // ON = Personas.Nombre=CarrosDueño.Dueño or Personas.Edad=CarrosDueño.Edad
 
     if (this.selectJoinForm.value.from != "" && this.selectJoinForm.value.innerJoin != "" && this.selectJoinForm.value.select != "" && this.selectJoinForm.value.on != "") {
       this.getSomeJoin(this.selectJoinForm.value.from + ", " + this.selectJoinForm.value.innerJoin, this.selectJoinForm.value.select, this.selectJoinForm.value.on);
