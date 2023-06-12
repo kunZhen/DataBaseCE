@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Datos } from 'src/app/models/chris.model';
 import { XmlmanagService } from 'src/app/service/xmlmanag.service';
@@ -8,7 +8,7 @@ import { XmlmanagService } from 'src/app/service/xmlmanag.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   // CARD STATUS
   createCardStatus: boolean = false;
   selectCardStatus: boolean = false;
@@ -21,6 +21,8 @@ export class HomeComponent {
   ngOnInit(): void {
 
   }
+
+  
 
   constructor( private createF: FormBuilder, private selectF: FormBuilder, private selectJoinF: FormBuilder,
     private insertF: FormBuilder, private deleteF: FormBuilder, private updateF: FormBuilder,

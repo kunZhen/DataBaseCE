@@ -25,18 +25,27 @@ namespace BackEnd.API.Controllers
         public IActionResult GetSomeData([FromQuery] string xmlName, string atributes, string conditions)
         {
             XmlManager xmlM= new XmlManager();
-            Console.WriteLine(xmlName);
-            Console.WriteLine(atributes);
-            Console.WriteLine(conditions);
+         
 
             List<List<string>> datos = xmlM.SelectFromXml(xmlName, atributes, conditions);
-            for (int i = 0; i < datos.Count; i++)
-            {
-                Console.WriteLine(string.Join("\t", datos[i]));
-            }
+       
 
             return Ok(datos);
         }
+
+        [HttpGet("GetSomeDataJoin")]
+        public IActionResult GetSomeDataJoin([FromQuery] string xmlName, string atributes, string conditions)
+        {
+            XmlManager xmlM = new XmlManager();
+          
+
+            List<List<string>> datos = xmlM.SelectFromXmlJoinAndOr(xmlName, atributes, conditions);
+      
+
+            return Ok(datos);
+        }
+
+
 
         [HttpPost]
         public async Task<IActionResult> AddData(string request, List<string> Lista) 
