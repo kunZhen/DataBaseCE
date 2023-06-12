@@ -45,4 +45,75 @@ export class XmlmanagService {
     return this.http.get<Array<Array<string>>>(this.baseApiUrl +  '/api/Chris/GetSomeDataJoin', options);
   
   }
+
+  createXML(XmlName: string, attribList: Array<string>): Observable<void> {
+    const options = {
+      params: {
+        request: XmlName,
+        Lista: attribList
+      }
+    };
+  
+    return this.http.get<void>(this.baseApiUrl + '/api/Chris/CreateXML', options);
+  }
+  
+
+  addData(XmlName: string, attribList: string): Observable<void>{
+    const options = {
+      params: {
+        request: XmlName,
+        Lista: attribList
+      }
+    };
+    return this.http.get<void>(this.baseApiUrl +  '/api/Chris/AgregarData', options);
+  }
+
+  deleteData(XmlName: string, Conditions: string, Confirmation: boolean): Observable<Array<Array<string>>>{
+    const options = {
+      params: {
+        xmlName: XmlName,
+        conditions: Conditions,
+        confirmation: Confirmation
+
+      }
+    };
+    return this.http.get<Array<Array<string>>>(this.baseApiUrl +  '/api/Chris/DeleteData', options);
+  
+  }
+
+  updateData(XmlName: string, Atributes:string, Conditions: string, Confirmation: boolean): Observable<Array<Array<string>>>{
+    const options = {
+      params: {
+        xmlName: XmlName,
+        conditions: Conditions,
+        atributtes: Atributes,
+        confirmation: Confirmation
+
+      }
+    };
+    return this.http.get<Array<Array<string>>>(this.baseApiUrl +  '/api/Chris/UpdateData', options);
+  
+  }
+
+  createUser(Username: string, Password: string): Observable<void>{
+    const options = {
+      params: {
+        username: Username,
+        password: Password
+      }
+    };
+    return this.http.get<void>(this.baseApiUrl +  '/api/Chris/CreateUser', options);
+  }
+
+  Loging(Username: string, Password: string): Observable<boolean>{
+    const options = {
+      params: {
+        username: Username,
+        password: Password
+      }
+    };
+    return this.http.get<boolean>(this.baseApiUrl +  '/api/Chris/Login', options);
+  }
+
+
 }
