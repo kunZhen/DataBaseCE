@@ -64,6 +64,7 @@ export class ChrisListComponent implements OnInit{
 
   //Select normal
   getAll() {
+    console.log(this.Namexml);
     this.Xml.getAllData(this.Namexml).subscribe(data => {
       this.Datosxml = data;
     });
