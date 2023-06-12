@@ -47,13 +47,11 @@ export class XmlmanagService {
   }
 
 
-  addData(XmlName: string, attribList: string): Observable<void> {
-    const body = {
-      request: XmlName,
-      Lista: attribList
-    };
-    return this.http.post<void>(this.baseApiUrl + '/api/Chris/AgregarData', body);
-  }
+  addData(XmlName: string, attribList: string): Observable<void>{
+    const url = `${this.baseApiUrl}/api/Chris/AgregarData?request=${XmlName}&Lista=${attribList}`;
+    return this.http.post<void>(url, {});
+}
+
 
 
   deleteData(XmlName: string, Conditions: string, Confirmation: boolean): Observable<Array<Array<string>>> {
@@ -77,14 +75,11 @@ export class XmlmanagService {
 
   }
 
-  createUser(Username: string, Password: string): Observable<void> {
-    const body = {
-      username: Username,
-      password: Password
-    };
+  createUser(Username: string, Password: string): Observable<void>{
+    const url = `${this.baseApiUrl}/api/Chris/CreateUser?username=${Username}&password=${Password}`;
+    return this.http.post<void>(url, {});
+}
 
-    return this.http.post<void>(this.baseApiUrl + '/api/Chris/CreateUser', body);
-  }
 
 
   loging(Username: string, Password: string): Observable<boolean> {

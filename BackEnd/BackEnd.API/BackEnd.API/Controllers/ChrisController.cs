@@ -58,25 +58,23 @@ namespace BackEnd.API.Controllers
         }
 
         [HttpPost("AgregarData")]
-        public IActionResult AgregarData([FromQuery] string request, string Lista)
+        public IActionResult AgregarData([FromQuery] string request, [FromQuery] string Lista)
         {
             XmlManager xmlrequest = new XmlManager();
             xmlrequest.AgregarDatosXml(request, Lista);
-
             return Ok();
         }
 
+
+
         [HttpGet("DeleteData")]
-        public IActionResult Delete([FromQuery] string request, string conditions, bool confirmation)
+        public IActionResult Delete([FromQuery] string xmlName, [FromQuery] string conditions, [FromQuery] bool confirmation)
         {
             XmlManager xmlM = new XmlManager();
-
-
-            List<List<string>> datos = xmlM.DeleteFromXml(request, conditions, confirmation);
-
-
+            List<List<string>> datos = xmlM.DeleteFromXml(xmlName, conditions, confirmation);
             return Ok(datos);
         }
+
 
 
         [HttpGet("UpdateData")]
@@ -92,22 +90,22 @@ namespace BackEnd.API.Controllers
         }
 
         [HttpPost("CreateUser")]
-        public IActionResult CreateUser([FromQuery] string username, string password)
+        public IActionResult CreateUser([FromQuery] string username, [FromQuery] string password)
         {
- 
             UserManager.SaveCompressedPassword(username, password);
-
             return Ok();
         }
 
-        [HttpGet("Login")]
-        public IActionResult Loginr([FromQuery] string username, string password)
-        {
 
+
+        [HttpGet("Login")]
+        public IActionResult Loginr([FromQuery] string username, [FromQuery] string password)
+        {
             bool passwordsMatch = UserManager.CheckCompressedPassword(username, password);
 
             return Ok(passwordsMatch);
         }
+
 
 
     }
