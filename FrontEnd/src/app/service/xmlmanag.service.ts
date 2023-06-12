@@ -66,13 +66,14 @@ updateData(XmlName: string, Atributes: string, Conditions: string, Confirmation:
   
   const url = `${this.baseApiUrl}/api/Chris/UpdateData`;
   const body = {
-    request: XmlName,
-    atributtes: Atributes,
-    conditions: Conditions,
-    confirmation: Confirmation
+    XmlName: XmlName,
+    Attributes: Atributes,
+    Conditions: Conditions,
+    Confirmation: Confirmation
   };
   return this.http.post<Array<Array<string>>>(url, body);
 }
+
 
 
   createUser(Username: string, Password: string): Observable<void>{
