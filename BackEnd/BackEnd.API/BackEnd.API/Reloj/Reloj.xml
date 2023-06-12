@@ -1,1 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Reloj><Atributo Atributo="Color" /></Reloj>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Reloj>
+  <Atributo Atributo="Color" />
+  <Instancia Color="Amarillo" />
+  <Instancia Color="Amarillo" />
+  <Instancia Color="Azul" />
+</Reloj>
