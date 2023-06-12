@@ -12,9 +12,9 @@ export class HomeComponent implements OnInit {
   // CARD STATUS
   createCardStatus: boolean = false;
   selectCardStatus: boolean = false;
-  insertCardStatus: boolean = true;
+  insertCardStatus: boolean = false;
   deleteCardStatus: boolean = false;
-  updateCardStatus: boolean = false;
+  updateCardStatus: boolean = true;
 
   datosXml: Datos = [];
   attrList: string[] = [];
@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit {
     where: ['']
   })
 
-  getData(nameXml: string, atributes: string, conditions: string){
+  getData(nameXml: string, atributes: string, conditions: string) {
     this.Xml.getData(nameXml, atributes, conditions).subscribe(data => {
       this.datosXml = data;
     });
@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit {
   //crea el XML
   createXML(xmlName: string, attribList: Array<string>) {
 
-    this.Xml.createXML(xmlName, attribList).subscribe(data => {});
+    this.Xml.createXML(xmlName, attribList).subscribe(data => { });
     console.log("attrList: ", typeof this.attrList);
 
     this.attrList = [];
@@ -95,9 +95,25 @@ export class HomeComponent implements OnInit {
 
   //Insert
   addData(xmlName: string, attribList: string) {
-    this.Xml.addData(xmlName, attribList).subscribe(data => {});
+    this.Xml.addData(xmlName, attribList).subscribe(data => { });
 
     console.log("addData executed");
+  }
+
+  deleteData(xmlName: string, conditions: string, confirmation: boolean) {
+    this.Xml.deleteData(xmlName, conditions, confirmation).subscribe(data => {
+      this.datosXml = data;
+    })
+
+    console.log("deleteData excuted");
+  }
+
+  updateData(XmlName: string, Atributes: string, Conditions: string, Confirmation: boolean) {
+    this.Xml.updateData(XmlName, Atributes, Conditions, Confirmation).subscribe(data => {
+      this.datosXml = data;
+    });
+
+    console.log("updateData executed")
   }
 
   //OnSubmitForms ------------------------------------------
@@ -153,6 +169,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
+
   selectJoinSubmit() {
     console.log(this.selectJoinForm.value);
     this.selectJoinForm.markAllAsTouched();
@@ -168,8 +185,8 @@ export class HomeComponent implements OnInit {
   }
 
 
-  //INSERT INTO =
-  //VALUES =
+  //INSERT INTO = Reloj
+  //VALUES = Color:Verde
   insertSubmit() {
     console.log(this.insertForm.value);
     this.insertForm.markAllAsTouched();
@@ -179,18 +196,45 @@ export class HomeComponent implements OnInit {
     }
   }
 
+
   deleteSubmit() {
     console.log(this.deleteForm.value);
     this.deleteForm.markAllAsTouched();
+
+    //DELETE FROM = Reloj
+    //WHERE = *
+
+    //DELETE FROM = Reloj
+    //WHERE = Azul
+
+    if (this.deleteForm.value.deleteFrom != "" && this.deleteForm.value.where != "") {
+      this.deleteData(this.deleteForm.value.deleteFrom, this.deleteForm.value.where, false)
+    }
   }
 
+
+  //UPDATE =
+  //SET =
+  //WHERE =
   updateSubmit() {
     console.log(this.updateForm.value);
     this.updateForm.markAllAsTouched();
+
+    if (this.updateForm.value.update != "" && this.updateForm.value.set != "" && this.updateForm.value.where != "") {
+      this.updateData(this.updateForm.value.update, this.updateForm.value.set, this.updateForm.value.where, false);
+    }
   }
 
   //submit -------------------------------------------------
   submit() {
+    if (this.deleteCardStatus && this.deleteForm.value.deleteFrom != "" && this.deleteForm.value.where != "") {
+      this.deleteData(this.deleteForm.value.deleteFrom, this.deleteForm.value.where, true)
+    }
+
+    if (this.updateCardStatus && this.updateForm.value.update != "" && this.updateForm.value.set != "" && this.updateForm.value.where != "") {
+      this.updateData(this.updateForm.value.update, this.updateForm.value.set, this.updateForm.value.where, true);
+    }
+
     console.log("submitted ");
   }
 
