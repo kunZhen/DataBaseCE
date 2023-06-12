@@ -1,13 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Reloj>
   <Atributo Atributo="Color" />
-  <Instancia Color="Amarillo" />
-  <Instancia Color="Amarillo" />
-  <Instancia Color="Amarillo" />
-  <Instancia Color="Amarillo" />
-  <Instancia Color="Amarillo" />
-  <Instancia Color="Azul" />
-  <Instancia Color="Azul" />
-  <Instancia Color="Azul" />
-  <Instancia Color="Azul" />
+  <Instancia Color="Verde" />
+  <Instancia Color="Verde" />
+  <Instancia Color="Verde" />
+  <Instancia Color="Verde" />
+  <Instancia Color="Verde" />
+  <Instancia Color="Verde" />
+  <Instancia Color="Verde" />
 </Reloj>

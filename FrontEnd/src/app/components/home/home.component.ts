@@ -10,11 +10,11 @@ import { XmlmanagService } from 'src/app/service/xmlmanag.service';
 })
 export class HomeComponent implements OnInit {
   // CARD STATUS
-  createCardStatus: boolean = false;
+  createCardStatus: boolean = true;
   selectCardStatus: boolean = false;
   insertCardStatus: boolean = false;
   deleteCardStatus: boolean = false;
-  updateCardStatus: boolean = true;
+  updateCardStatus: boolean = false;
 
   datosXml: Datos = [];
   attrList: string[] = [];
@@ -213,9 +213,9 @@ export class HomeComponent implements OnInit {
   }
 
 
-  //UPDATE =
-  //SET =
-  //WHERE =
+  //UPDATE = Reloj
+  //SET = Color=Azul
+  //WHERE = Color=Rosado
   updateSubmit() {
     console.log(this.updateForm.value);
     this.updateForm.markAllAsTouched();
