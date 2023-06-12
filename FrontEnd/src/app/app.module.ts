@@ -29,4 +29,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   providers: [],
   bootstrap: [AppComponent]
 })
+/* `export class AppModule` is exporting the `AppModule` class, which is the main module of the Angular
+application. This allows other parts of the application to import and use the `AppModule` class. */
 export class AppModule { }

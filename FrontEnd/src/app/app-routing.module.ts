@@ -32,4 +32,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+/* `export class AppRoutingModule` is exporting the `AppRoutingModule` class so that it can be used in
+other parts of the application. This allows other modules to import and use the routing
+configuration defined in `AppRoutingModule`. */
 export class AppRoutingModule { }
