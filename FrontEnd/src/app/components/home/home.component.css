@@ -1,12 +1,49 @@
+/**
+ * Estilo para el cuerpo de la página.
+ *
+ * Propósito: Establecer la altura mínima del cuerpo de la página.
+ *
+ * Propiedades:
+ * - min-height: 100vh: Establece la altura mínima del cuerpo de la página como el 100% de la altura de la ventana.
+ * - min-height: -webkit-fill-available: Establece la altura mínima del cuerpo de la página utilizando la propiedad -webkit-fill-available, que garantiza que ocupe todo el espacio disponible en la ventana.
+ *
+ * Notas adicionales:
+ * - Esta regla asegura que el cuerpo de la página tenga una altura mínima para evitar problemas de diseño cuando el contenido es escaso.
+ */
+
 body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
 }
 
+/**
+ * Estilos para el HTML y el elemento main.
+ *
+ * HTML:
+ * Propósito: Establecer la altura del HTML para ocupar todo el espacio disponible.
+ * Propiedad:
+ * - height: -webkit-fill-available: Establece la altura del HTML utilizando la propiedad -webkit-fill-available, que garantiza que ocupe todo el espacio disponible en la ventana.
+ *
+ * Notas adicionales:
+ * - Estas reglas aseguran que el HTML ocupe todo el espacio disponible y que el elemento main tenga un diseño flexible y controlado, con desplazamiento horizontal si es necesario.
+ */
 html {
   height: -webkit-fill-available;
 }
 
+
+/**
+ Main:
+ * Propósito: Establecer estilos para el elemento main.
+ * Propiedades:
+ * - display: flex: Establece el elemento main como un contenedor flexible.
+ * - flex-wrap: nowrap: Evita que los elementos hijos del main se envuelvan a una nueva línea.
+ * - height: 100vh: Establece la altura del main como el 100% de la altura de la ventana.
+ * - height: -webkit-fill-available: Establece la altura del main utilizando la propiedad -webkit-fill-available, que garantiza que ocupe todo el espacio disponible en la ventana.
+ * - max-height: 100vh: Establece la altura máxima del main como el 100% de la altura de la ventana.
+ * - overflow-x: auto: Habilita el desplazamiento horizontal si el contenido del main excede el ancho de la ventana.
+ * - overflow-y: hidden: Oculta el desplazamiento vertical en el main.
+ */
 main {
   display: flex;
   flex-wrap: nowrap;
@@ -17,6 +54,128 @@ main {
   overflow-y: hidden;
 }
 
+
+/**
+ * Estilos para diferentes elementos de la página.
+ *
+ * Clase: .b-example-divider
+ * Propósito: Establecer estilos para un divisor de ejemplo.
+ * Propiedades:
+ * - flex-shrink: 0: Evita que el divisor se reduzca en tamaño al haber espacio insuficiente.
+ * - width: 1.5rem: Establece el ancho del divisor en 1.5 rem.
+ * - height: 100vh: Establece la altura del divisor como el 100% de la altura de la ventana.
+ * - background-color: rgba(0, 0, 0, .1): Establece el color de fondo del divisor como un color negro con transparencia.
+ * - border: solid rgba(0, 0, 0, .15): Establece un borde sólido en el divisor con un color negro con transparencia.
+ * - border-width: 1px 0: Establece el ancho del borde superior e inferior del divisor en 1 píxel.
+ * - box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15): Agrega una sombra interna al divisor para darle una apariencia de relieve.
+ *
+ * Clase: .bi
+ * Propósito: Establecer estilos para un icono.
+ * Propiedades:
+ * - vertical-align: -.125em: Ajusta la alineación vertical del icono.
+ * - pointer-events: none: Deshabilita los eventos de puntero en el icono.
+ * - fill: currentColor: Establece el color de relleno del icono al color actual.
+ *
+ * Clase: .dropdown-toggle
+ * Propósito: Establecer estilos para un elemento de alternancia de menú desplegable.
+ * Propiedad:
+ * - outline: 0: Elimina el contorno al hacer clic en el elemento de alternancia.
+ *
+ * Clase: .nav-flush .nav-link
+ * Propósito: Establecer estilos para los enlaces de navegación en un contenedor sin relleno.
+ * Propiedad:
+ * - border-radius: 0: Elimina el radio de borde de los enlaces de navegación.
+ *
+ * Clase: .btn-toggle
+ * Propósito: Establecer estilos para un botón de alternancia.
+ * Propiedades:
+ * - display: inline-flex: Establece el botón de alternancia como un elemento en línea flexible.
+ * - align-items: center: Alinea verticalmente el contenido del botón de alternancia al centro.
+ * - padding: .25rem .5rem: Establece el relleno del botón de alternancia.
+ * - font-weight: 600: Establece el peso de la fuente del botón de alternancia a 600 (negrita).
+ * - color: rgba(0, 0, 0, .65): Establece el color de texto del botón de alternancia.
+ * - background-color: transparent: Establece el fondo del botón de alternancia como transparente.
+ * - border: 0: Elimina el borde del botón de alternancia.
+ *
+ * Clase: .btn-toggle:hover, .btn-toggle:focus
+ * Propósito: Establecer estilos para el estado de hover o foco del botón de alternancia.
+ * Propiedades:
+ * - color: rgba(0, 0, 0, .85): Cambia el color de texto del botón de alternancia al hacer hover o enfocar.
+ * - background-color: #d2f4ea: Cambia el fondo del botón de alternancia al hacer hover o enfocar.
+ *
+ * Clase: .btn-toggle::before
+ * Propósito: Establecer estilos para el pseudo-elemento ::before del botón de alternancia.
+ * Propiedades:
+ * - width: 1.25em: Establece el ancho del pseudo-elemento ::before.
+ * - line-height: 0: Establece la altura de línea del pseudo-elemento ::before a 0.
+ * - content: url("data:image/svg+xml,%3csvg..."): Define el contenido del pseudo-elemento ::before como una imagen SVG en formato de datos.
+ * - transition: transform .35s ease: Agrega una transición al pseudo-elemento ::before para suavizar los cambios de transformación.
+ * - transform-origin: .5em 50%: Establece el origen de transformación del pseudo-elemento ::before.
+ *
+ * Clase: .btn-toggle[aria-expanded="true"]
+ * Propósito: Establecer estilos para el botón de alternancia cuando está expandido.
+ * Propiedad:
+ * - color: rgba(0, 0, 0, .85): Cambia el color de texto del botón de alternancia cuando está expandido.
+ *
+ * Clase: .btn-toggle[aria-expanded="true"]::before
+ * Propósito: Establecer estilos para el pseudo-elemento ::before del botón de alternancia cuando está expandido.
+ * Propiedad:
+ * - transform: rotate(90deg): Rota el pseudo-elemento ::before cuando el botón de alternancia está expandido.
+ *
+ * Clase: .btn-toggle-nav a
+ * Propósito: Establecer estilos para los enlaces dentro de un botón de alternancia de navegación.
+ * Propiedades:
+ * - display: inline-flex: Establece los enlaces como elementos en línea flexibles dentro del botón de alternancia de navegación.
+ * - padding: .1875rem .5rem: Establece el relleno de los enlaces dentro del botón de alternancia de navegación.
+ * - margin-top: .125rem: Establece el margen superior de los enlaces dentro del botón de alternancia de navegación.
+ * - margin-left: 1.25rem: Establece el margen izquierdo de los enlaces dentro del botón de alternancia de navegación.
+ * - text-decoration: none: Elimina la decoración de texto de los enlaces dentro del botón de alternancia de navegación.
+ *
+ * Clase: .btn-toggle-nav a:hover, .btn-toggle-nav a:focus
+ * Propósito: Establecer estilos para el estado de hover o foco de los enlaces dentro del botón de alternancia de navegación.
+ * Propiedad:
+ * - background-color: #d2f4ea: Cambia el fondo de los enlaces al hacer hover o enfocar dentro del botón de alternancia de navegación.
+ *
+ * Clase: .scrollarea
+ * Propósito: Establecer estilos para un área de desplazamiento.
+ * Propiedad:
+ * - overflow-y: auto: Habilita el desplazamiento vertical si el contenido del área de desplazamiento excede el alto disponible.
+ *
+ * Clase: .fw-semibold
+ * Propósito: Establecer estilos para un texto con peso de fuente semibold.
+ * Propiedad:
+ * - font-weight: 600: Establece el peso de fuente a 600 (semibold).
+ *
+ * Clase: .lh-tight
+ * Propósito: Establecer estilos para un espaciado de línea ajustado.
+ * Propiedad:
+ * - line-height: 1.25: Establece el espaciado de línea en 1.25.
+ *
+ * Clase: .wrapper
+ * Propósito: Establecer estilos para un contenedor flexible.
+ * Propiedades:
+ * - display: flex: Establece el contenedor como un contenedor flexible.
+ * - width: 60%: Establece el ancho del contenedor en un 60% del ancho disponible.
+ * - align-items: stretch: Establece la alineación vertical de los elementos del contenedor como estirados.
+ *
+ * Clase: .navbar
+ * Propósito: Establecer estilos para una barra de navegación.
+ * Propiedades:
+ * - padding: 15px 10px: Establece el relleno de la barra de navegación.
+ * - background: #fff: Establece el color de fondo de la barra de navegación como blanco.
+ * - border: none: Elimina el borde de la barra de navegación.
+ * - border-radius: 0: Elimina el radio de borde de la barra de navegación.
+ * - margin-bottom: 40px: Establece el margen inferior de la barra de navegación en 40 píxeles.
+ * - box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1): Agrega una sombra a la barra de navegación para darle una apariencia de relieve.
+ *
+ * Selector: #content
+ * Propósito: Establecer estilos para el contenido principal.
+ * Propiedades:
+ * - width: 100%: Establece el ancho del contenido principal al 100% del ancho disponible.
+ * - padding: 20px: Establece el relleno del contenido principal en 20 píxeles.
+ * - min-height: 100vh: Establece la altura mínima del contenido principal como el 100% de la altura de la ventana.
+ * - transition: all 0.3s: Agrega una transición suave a todas las propiedades del contenido principal con una duración de 0.3 segundos.
+ */
 .b-example-divider {
   flex-shrink: 0;
   width: 1.5rem;

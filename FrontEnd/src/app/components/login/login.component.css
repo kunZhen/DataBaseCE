@@ -1,3 +1,14 @@
+/**
+ * Estilos para un fondo degradado personalizado.
+ *
+ * Clase: .gradient-custom-2
+ * Propósito: Establecer un fondo degradado personalizado.
+ * Propiedades:
+ * - background: #fccb90: Establece un color de fondo de respaldo para navegadores antiguos.
+ * - background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593): Establece un fondo degradado lineal en navegadores Chrome y Safari antiguos.
+ * - background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593): Establece un fondo degradado lineal en navegadores modernos.
+ */
+
 .gradient-custom-2 {
   /* fallback for old browsers */
   background: #fccb90;
@@ -7,16 +18,36 @@
 
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
-  }
+}
 
-  @media (min-width: 768px) {
+/**
+ * Estilos para una forma degradada personalizada en pantallas más grandes.
+ *
+ * Selector: @media (min-width: 768px)
+ * Propósito: Aplicar estilos específicos cuando el ancho de la ventana sea igual o mayor a 768 píxeles.
+ * Propiedades:
+ * - .gradient-form { height: 100vh !important; }: Establece la altura de un elemento con la clase "gradient-form" a 100% de la altura de la ventana, anulando cualquier otra regla de altura aplicada anteriormente.
+ */
+@media (min-width: 768px) {
   .gradient-form {
-  height: 100vh !important;
+    height: 100vh !important;
   }
-  }
-  @media (min-width: 769px) {
+}
+
+/**
+ * Estilos adicionales para el fondo degradado personalizado en pantallas más grandes.
+ *
+ * Selector: @media (min-width: 769px)
+ * Propósito: Aplicar estilos específicos cuando el ancho de la ventana sea igual o mayor a 769 píxeles.
+ * Propiedades:
+ * - .gradient-custom-2 { border-top-right-radius: .3rem; }: Establece el radio de borde superior derecho de un elemento con la clase "gradient-custom-2" a 0.3 rem.
+ * - .gradient-custom-2 { border-bottom-right-radius: .3rem; }: Establece el radio de borde inferior derecho de un elemento con la clase "gradient-custom-2" a 0.3 rem.
+ */
+
+
+@media (min-width: 769px) {
   .gradient-custom-2 {
-  border-top-right-radius: .3rem;
-  border-bottom-right-radius: .3rem;
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
   }
-  }
+}
