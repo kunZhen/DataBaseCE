@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuario\\Documents\\I Semestre - 2023\\DataBaseCE\\frontEnd\\BackEnd\\BackEnd.API\\BackEnd.API\\BackEnd.API.csproj": {}
+    "C:\\Users\\chris\\OneDrive\\Escritorio\\Materia\\Datos\\DataBaseCE\\BackEnd\\BackEnd.API\\BackEnd.API\\BackEnd.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuario\\Documents\\I Semestre - 2023\\DataBaseCE\\frontEnd\\BackEnd\\BackEnd.API\\BackEnd.API\\BackEnd.API.csproj": {
+    "C:\\Users\\chris\\OneDrive\\Escritorio\\Materia\\Datos\\DataBaseCE\\BackEnd\\BackEnd.API\\BackEnd.API\\BackEnd.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\Documents\\I Semestre - 2023\\DataBaseCE\\frontEnd\\BackEnd\\BackEnd.API\\BackEnd.API\\BackEnd.API.csproj",
+        "projectUniqueName": "C:\\Users\\chris\\OneDrive\\Escritorio\\Materia\\Datos\\DataBaseCE\\BackEnd\\BackEnd.API\\BackEnd.API\\BackEnd.API.csproj",
         "projectName": "BackEnd.API",
-        "projectPath": "C:\\Users\\Usuario\\Documents\\I Semestre - 2023\\DataBaseCE\\frontEnd\\BackEnd\\BackEnd.API\\BackEnd.API\\BackEnd.API.csproj",
-        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\Documents\\I Semestre - 2023\\DataBaseCE\\frontEnd\\BackEnd\\BackEnd.API\\BackEnd.API\\obj\\",
+        "projectPath": "C:\\Users\\chris\\OneDrive\\Escritorio\\Materia\\Datos\\DataBaseCE\\BackEnd\\BackEnd.API\\BackEnd.API\\BackEnd.API.csproj",
+        "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\chris\\OneDrive\\Escritorio\\Materia\\Datos\\DataBaseCE\\BackEnd\\BackEnd.API\\BackEnd.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
