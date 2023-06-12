@@ -1,0 +1,8 @@
+@startuml
+class ClassName {
+  +attribute: type
+  +method(parameter: type): return_type
+}
+
+ClassName -- AnotherClass : relationship
+@enduml

@@ -61,19 +61,17 @@ export class XmlmanagService {
 }
 
 
-  updateData(XmlName: string, Atributes: string, Conditions: string, Confirmation: boolean): Observable<Array<Array<string>>> {
-    const options = {
-      params: {
-        xmlName: XmlName,
-        conditions: Conditions,
-        atributtes: Atributes,
-        confirmation: Confirmation
+updateData(XmlName: string, Atributes: string, Conditions: string, Confirmation: boolean): Observable<Array<Array<string>>> {
+  const url = `${this.baseApiUrl}/api/Chris/UpdateData`;
+  const body = {
+    request: XmlName,
+    atributtes: Atributes,
+    conditions: Conditions,
+    confirmation: Confirmation
+  };
+  return this.http.post<Array<Array<string>>>(url, body);
+}
 
-      }
-    };
-    return this.http.get<Array<Array<string>>>(this.baseApiUrl + '/api/Chris/UpdateData', options);
-
-  }
 
   createUser(Username: string, Password: string): Observable<void>{
     const url = `${this.baseApiUrl}/api/Chris/CreateUser?username=${Username}&password=${Password}`;
