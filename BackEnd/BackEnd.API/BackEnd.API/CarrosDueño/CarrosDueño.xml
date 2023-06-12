@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CarrosDueño>
+  <Atributo Atributo="Dueño" />
+  <Atributo Atributo="Modelo" />
+  <Atributo Atributo="Edad" />
+  <Instancia Dueño="Pedro" Modelo="Mercedez" Edad="68" />
+  <Instancia Dueño="Juan" Modelo="Ferrari" Edad="28" />
+  <Instancia Dueño="Maria" Modelo="Tesla" Edad="68" />
+</CarrosDueño>

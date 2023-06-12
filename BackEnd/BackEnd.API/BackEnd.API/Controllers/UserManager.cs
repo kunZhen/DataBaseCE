@@ -34,7 +34,11 @@ namespace app
         deserializes the Huffman tree frequencies and the length of the encoded BitArray from the
         file. It then builds a new Huffman tree using the user's password and decodes the BitArray
         using the Huffman tree. Finally, it compares the decoded password with the original password
-        and returns true if they match, and false otherwise. */
+        and returns true if they match, and false otherwise. If the decoded password matches the
+        original password, it sends a signal to an Arduino connected to the computer via a serial
+        port to indicate that the password was correct. If the decoded password does not match the
+        original password, it sends a different signal to the Arduino to indicate that the password
+        was incorrect. */
         public static bool CheckCompressedPassword(string username, string password)
         {
             if (!File.Exists(Path.Combine("UserInfo", username)))
@@ -67,6 +71,25 @@ namespace app
             if (decoded == password)
             {
                 // La contraseña coincide
+                try
+                {
+                    // Abre la conexión con el puerto serie del Arduino
+                    using (SerialPort arduinoPort = new SerialPort("COM3", 9600))
+                    {
+                        arduinoPort.Open();
+
+                        // Envía la señal al Arduino
+                        arduinoPort.Write("S"); // Puedes enviar cualquier carácter o cadena que desees
+
+                        // Cierra la conexión con el puerto serie del Arduino
+                        arduinoPort.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Maneja cualquier excepción que pueda ocurrir al comunicarse con el Arduino
+                    Console.WriteLine("Error al enviar la señal al Arduino: " + ex.Message);
+                }
                 return true;
             }
             else
